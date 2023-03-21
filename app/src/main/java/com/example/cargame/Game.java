@@ -10,7 +10,7 @@ public class Game {
 
     private boolean gameIsRunning;
 
-    private int time = 0
+    private int time = 0;
 
     private Player player;
 
@@ -34,6 +34,10 @@ public class Game {
 
         moveObstaclesDown();
         carCrash();
+        if(time > 10){
+            addObstacleRandom();
+            time = 0;
+        }
         try{
             Thread.sleep(1000);
             if (gameIsRunning) loop();
