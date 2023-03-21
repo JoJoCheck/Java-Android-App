@@ -34,10 +34,19 @@ public class Game {
             //do stuff
         }
     }
+    public void moveObstaclesDown(){
+        for(int j = 0; j< 3; j++) {
+            for (int i = 0; i < lanes[j].size(); i++) {
+                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() - 1);
+            }
+        }
+    }
 
 
     public void addObstacle(int lane){
-
+        if(lane < 0 || lane > 3){throw new RuntimeException("nicht vorhandene Lane");}
+        Obstacle obst = new Obstacle();
+        lanes[lane].add(obst);
     }
 
     public int getGameSpeed() {
