@@ -20,7 +20,7 @@ public class Player {
         }
     }
 
-    public void moveRigth(){
+    public void moveRight(){
         if (lane==0 || lane==1) {
             this.lane ++;
         }

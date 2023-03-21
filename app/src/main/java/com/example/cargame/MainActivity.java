@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup group = findViewById(R.id.cl);
         startGameButton.setOnClickListener(v -> {
             Game game = new Game(group);
+            startGameButton.setVisibility(View.GONE);
         });
+
     }
 }

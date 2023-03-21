@@ -1,6 +1,7 @@
 package com.example.cargame;
 
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -72,6 +73,18 @@ public class Game {
                 }
             }
         }
+    }
+    public void movePlayerRight(){
+        Button moveRightButton = group.findViewById(R.id.rightbutton);
+        moveRightButton.setOnClickListener (v -> {
+            player.moveRight();
+        } );
+    }
+    public void movePlayerLeft(){
+        Button moveLeftButton = group.findViewById(R.id.leftbutton);
+        moveLeftButton.setOnClickListener(v -> {
+            player.moveLeft();
+        } );
     }
 
 
