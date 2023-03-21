@@ -37,16 +37,20 @@ public class Game {
     public void moveObstaclesDown(){
         for(int j = 0; j< 3; j++) {
             for (int i = 0; i < lanes[j].size(); i++) {
-                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() - 1);
+                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() - gameSpeed);
             }
         }
     }
 
-
     public void addObstacle(int lane){
-        if(lane < 0 || lane > 3){throw new RuntimeException("nicht vorhandene Lane");}
+        if(lane < 0 || lane > 2){throw new RuntimeException("nicht vorhandene Lane");}
         Obstacle obst = new Obstacle();
         lanes[lane].add(obst);
+    }
+    public void addObstacleRando(){
+        double lane = Math.random();
+        Obstacle obstacle = new Obstacle();
+        lanes[(int) (lane * 2)].add(obstacle);
     }
 
     public int getGameSpeed() {
