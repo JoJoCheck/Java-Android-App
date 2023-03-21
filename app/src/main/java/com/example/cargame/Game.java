@@ -10,6 +10,8 @@ public class Game {
 
     private boolean gameIsRunning;
 
+    private int time = 0
+
     private Player player;
 
     public Game(){
@@ -19,6 +21,7 @@ public class Game {
         lanes[2] = new ArrayList<>();
         player = new Player();
 
+        time = 0;
         gameSpeed = 1;
         points = 0;
         gameIsRunning = true;
@@ -26,6 +29,7 @@ public class Game {
     }
 
     public void loop() {
+        time++;
 
 
         moveObstaclesDown();
@@ -50,10 +54,9 @@ public class Game {
         Obstacle obst = new Obstacle();
         lanes[lane].add(obst);
     }
-    public void addObstacleRando(){
+    public void addObstacleRandom(){
         double lane = Math.random();
-        Obstacle obstacle = new Obstacle();
-        lanes[(int) (lane * 2)].add(obstacle);
+        addObstacle((int) (lane * 2));
     }
 
     public int getGameSpeed() {
