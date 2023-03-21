@@ -16,9 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/imageView"
@@ -38,28 +36,6 @@
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/leftbutton"
-        android:layout_width="132dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="600dp"
-        android:layout_weight="1"
-        android:text="Left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/rightbutton"
-        android:layout_width="127dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="270dp"
-        android:layout_marginTop="600dp"
-        android:layout_weight="1"
-        android:text="Right"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
