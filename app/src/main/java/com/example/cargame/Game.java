@@ -8,11 +8,16 @@ public class Game {
     private int gameSpeed;
     private int points;
 
+    private boolean gameIsRunning;
+
+    private Player player;
+
     public Game(){
 
         lanes[0] = new ArrayList<>();
         lanes[1] = new ArrayList<>();
         lanes[2] = new ArrayList<>();
+        player = new Player();
 
         gameSpeed = 1;
         points = 0;
@@ -23,9 +28,8 @@ public class Game {
 
         System.out.println("Test");
         try{
-
             Thread.sleep(1000);
-            loop();
+            if (gameIsRunning) loop();
         }catch(InterruptedException ex){
             //do stuff
         }
@@ -52,4 +56,22 @@ public class Game {
         this.points = points;
     }
 
+    public void carCrash() {
+        if (collision()) {
+            gameIsRunning = false;
+            System.out.println(" -- Crash -- ");
+        }
+    }
+
+    public boolean collision(){
+        for (int i = 0; i < lanes.length; i++){
+            if (player.getLane() != i) continue;
+            for(Obstacle obstacle : lanes[i]){
+                if (obstacle.getPosition() <= 30 && obstacle.getPosition() >= 5){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
