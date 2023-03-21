@@ -3,6 +3,9 @@ package com.example.cargame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,6 +14,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Game game = new Game();
+        startGame();
+    }
+
+    protected void startGame(){
+        Button startGameButton = findViewById(R.id.button);
+        startGameButton.setOnClickListener(v -> {
+            Game game = new Game();
+        });
     }
 }
