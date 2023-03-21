@@ -21,17 +21,20 @@ public class Game {
 
         gameSpeed = 1;
         points = 0;
+        gameIsRunning = true;
         this.loop();
     }
 
     public void loop() {
 
-        System.out.println("Test");
+
+        moveObstaclesDown();
+        carCrash();
         try{
             Thread.sleep(1000);
             if (gameIsRunning) loop();
         }catch(InterruptedException ex){
-            //do stuff
+            throw new RuntimeException("idk");
         }
     }
     public void moveObstaclesDown(){
