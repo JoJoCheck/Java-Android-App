@@ -4,6 +4,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,6 +24,7 @@ public class Game {
     private Player player;
 
     public ViewGroup group;
+    public Random random;
 
 
     public Game(ViewGroup group){
@@ -33,6 +35,7 @@ public class Game {
         lanes[2] = new ArrayList<>();
         player = new Player();
         this.group = group;
+        random = new Random();
 
         time = 0;
         gameSpeed = 1;
@@ -56,20 +59,21 @@ public class Game {
         if(time % 10 == 0){
             addObstacleRandom();
         }
-
     }
     public void moveObstaclesDown(){
-        for(int j = 0; j< 3; j++) {
-            for (int i = 0; i < lanes[j].size(); i++) {
-                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
+        for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < lanes[i].size(); j++) {
+                lanes[i].get(j).setPosition(lanes[i].get(j).getPosition() + gameSpeed);
+
                 //Position die vorherige plus eins setzen
-                if(lanes[j].get(i).getPosition() == 2400){
-                    removeObstacle(j, lanes[j].get(i));
+                if(lanes[i].get(j).getPosition() == 2400){
+                    removeObstacle(i, lanes[i].get(j));
                     //Objekte wenn sie am Rand sind auf null setzen
                 }
             }
         }
     }
+
 
     public void addObstacle(int lane){
         if(lane < 0 || lane > 2){throw new RuntimeException("nicht vorhandene Lane");}
@@ -77,8 +81,7 @@ public class Game {
         lanes[lane].add(obst);
     }
     public void addObstacleRandom(){
-        double lane = Math.random();
-        addObstacle((int) (lane * 2));
+        addObstacle(random.nextInt(3));
     }
     public void removeObstacle(int lane, Obstacle obst){
         lanes[lane].remove(obst);
