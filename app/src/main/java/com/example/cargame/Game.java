@@ -3,17 +3,16 @@ package com.example.cargame;
 import java.util.ArrayList;
 
 public class Game {
-    public ArrayList<Obstacle> firstLane;
-    public ArrayList<Obstacle> secondLane;
-    public ArrayList<Obstacle> thirdLane;
+    public ArrayList<Obstacle>[] lanes = new ArrayList[3];
 
     private int gameSpeed;
     private int points;
 
     public Game(){
-        firstLane = new ArrayList<>();
-        secondLane = new ArrayList<>();
-        thirdLane = new ArrayList<>();
+
+        lanes[0] = new ArrayList<>();
+        lanes[1] = new ArrayList<>();
+        lanes[2] = new ArrayList<>();
 
         gameSpeed = 1;
         points = 0;
@@ -21,7 +20,6 @@ public class Game {
     }
 
     public void loop() {
-
 
         System.out.println("Test");
         try{
@@ -34,6 +32,9 @@ public class Game {
     }
 
 
+    public void addObstacle(int lane){
+
+    }
 
     public int getGameSpeed() {
         return gameSpeed;
@@ -51,9 +52,4 @@ public class Game {
         this.points = points;
     }
 
-
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.loop();
-    }
 }
