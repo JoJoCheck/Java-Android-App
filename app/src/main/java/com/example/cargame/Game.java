@@ -61,13 +61,13 @@ public class Game {
         }
     }
     public void moveObstaclesDown(){
-        for(int j = 0; j< 3; j++) {
-            for (int i = 0; i < lanes[j].size(); i++) {
-                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
+        for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < lanes[i].size(); j++) {
+                lanes[i].get(j).setPosition(lanes[i].get(j).getPosition() + gameSpeed);
 
                 //Position die vorherige plus eins setzen
-                if(lanes[j].get(i).getPosition() == 2400){
-                    removeObstacle(j, lanes[j].get(i));
+                if(lanes[i].get(j).getPosition() == 2400){
+                    removeObstacle(i, lanes[i].get(j));
                     //Objekte wenn sie am Rand sind auf null setzen
                 }
             }
