@@ -34,7 +34,7 @@ public class Game {
 
         moveObstaclesDown();
         carCrash();
-        if(time > 10){
+        if(time > 100){
             addObstacleRandom();
             time = 0;
         }
@@ -48,7 +48,12 @@ public class Game {
     public void moveObstaclesDown(){
         for(int j = 0; j< 3; j++) {
             for (int i = 0; i < lanes[j].size(); i++) {
-                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() - gameSpeed);
+                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
+                //Position die vorherige plus eins setzen
+                if(lanes[j].get(i).getPosition() == 2400){
+                    removeObstacle( lanes[j].get(i));
+                    //Objekte wenn sie am Rand sind auf null setzen
+                }
             }
         }
     }
@@ -61,6 +66,9 @@ public class Game {
     public void addObstacleRandom(){
         double lane = Math.random();
         addObstacle((int) (lane * 2));
+    }
+    public void removeObstacle(Obstacle obst){
+        obst = null;
     }
 
     public int getGameSpeed() {
