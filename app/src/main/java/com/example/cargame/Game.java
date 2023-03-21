@@ -1,6 +1,12 @@
 package com.example.cargame;
 
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class Game {
     public ArrayList<Obstacle>[] lanes = new ArrayList[3];
@@ -8,24 +14,37 @@ public class Game {
     private int gameSpeed;
     private int points;
 
+    private Timer timer = new Timer();
+
     private boolean gameIsRunning;
 
-    private int time = 0;
+    private int time;
 
     private Player player;
 
-    public Game(){
+    public ViewGroup group;
+
+
+    public Game(ViewGroup group){
+
 
         lanes[0] = new ArrayList<>();
         lanes[1] = new ArrayList<>();
         lanes[2] = new ArrayList<>();
         player = new Player();
+        this.group = group;
 
         time = 0;
         gameSpeed = 1;
         points = 0;
         gameIsRunning = true;
-        this.loop();
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (gameIsRunning) loop();
+            }
+        }, 10, 1000/30);
     }
 
     public void loop() {
@@ -34,16 +53,10 @@ public class Game {
 
         moveObstaclesDown();
         carCrash();
-        if(time > 100){
+        if(time % 10 == 0){
             addObstacleRandom();
-            time = 0;
         }
-        try{
-            Thread.sleep(1000);
-            if (gameIsRunning) loop();
-        }catch(InterruptedException ex){
-            throw new RuntimeException("idk");
-        }
+
     }
     public void moveObstaclesDown(){
         for(int j = 0; j< 3; j++) {
@@ -51,7 +64,7 @@ public class Game {
                 lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
                 //Position die vorherige plus eins setzen
                 if(lanes[j].get(i).getPosition() == 2400){
-                    removeObstacle( lanes[j].get(i));
+                    removeObstacle(j, lanes[j].get(i));
                     //Objekte wenn sie am Rand sind auf null setzen
                 }
             }
@@ -67,8 +80,8 @@ public class Game {
         double lane = Math.random();
         addObstacle((int) (lane * 2));
     }
-    public void removeObstacle(Obstacle obst){
-        obst = null;
+    public void removeObstacle(int lane, Obstacle obst){
+        lanes[lane].remove(obst);
     }
 
     public int getGameSpeed() {
@@ -98,7 +111,7 @@ public class Game {
         for (int i = 0; i < lanes.length; i++){
             if (player.getLane() != i) continue;
             for(Obstacle obstacle : lanes[i]){
-                if (obstacle.getPosition() <= 30 && obstacle.getPosition() >= 5){
+                if (obstacle.getPosition() <= 2000 && obstacle.getPosition() >= 2200){
                     return true;
                 }
             }
