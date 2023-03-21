@@ -1,15 +1,23 @@
 package com.example.cargame;
 
-public class Obstacle {
-    private int position;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+public class Obstacle{
+    private float position;
+    ImageView car;
 
     public Obstacle(){
         setPosition(200); //fester Wert ganz oben am Bildschrim
+    public Obstacle(ViewGroup viewGroup){
+        this.car = viewGroup.findViewById(R.id.car);
+        setPosition(0); //fester Wert ganz oben am Bildschrim
     }
-    public void setPosition(int position) {
-        this.position = position;
+    public void setPosition(float position) {
+        this.car.setY(position);
     }
-    public int getPosition() {
-        return position;
+    public float getPosition() {
+        return this.car.getY();
     }
 }

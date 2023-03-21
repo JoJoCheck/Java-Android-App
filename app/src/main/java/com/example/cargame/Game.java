@@ -56,7 +56,6 @@ public class Game {
         if(time % 10 == 0){
             addObstacleRandom();
         }
-
     }
     public void moveObstaclesDown(){
         for(int j = 0; j< 3; j++) {
@@ -70,6 +69,7 @@ public class Game {
             }
         }
     }
+
 
     public void addObstacle(int lane){
         if(lane < 0 || lane > 2){throw new RuntimeException("nicht vorhandene Lane");}
