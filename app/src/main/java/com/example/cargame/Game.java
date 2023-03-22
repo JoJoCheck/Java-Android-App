@@ -51,7 +51,7 @@ public class Game {
         this.group = activity.findViewById(R.id.cl);
         this.activity = activity;
         time = 0;
-        gameSpeed = 3;
+        gameSpeed = 10;
         points = 0;
         gameIsRunning = true;
      //   group.removeView(group.findViewById(R.id.button));
@@ -211,7 +211,7 @@ public class Game {
         for (int i = 0; i < lanes.length; i++){
             if (player.getLane() != i) continue;
             for(Obstacle obstacle : lanes[i]){
-                if (obstacle.getPosition() <= 700 && obstacle.getPosition() >= 800){
+                if (obstacle.getPosition() >= 900 && obstacle.getPosition() <= 1000){
                     System.out.println("rwet");
                     return true;
                 }
