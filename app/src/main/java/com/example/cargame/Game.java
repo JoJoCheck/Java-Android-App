@@ -119,6 +119,7 @@ public class Game {
 
     public void addObstacleRandom(){
         addObstacle(random.nextInt(3));
+        System.out.println("new");
     }
 
     public void addObstacle(int lane){
@@ -170,6 +171,13 @@ public class Game {
 
     public void removeObstacle(int lane, Obstacle obst){
         lanes[lane].remove(obst);
+        activity.runOnUiThread(
+                ()-> {
+                    group.removeView(group.findViewById(obst.getId()));
+                }
+        );
+
+        System.out.println("removed");
     }
 
     public int getGameSpeed() {
@@ -203,8 +211,8 @@ public class Game {
         for (int i = 0; i < lanes.length; i++){
             if (player.getLane() != i) continue;
             for(Obstacle obstacle : lanes[i]){
-                System.out.println(obstacle.getPosition());
                 if (obstacle.getPosition() <= 700 && obstacle.getPosition() >= 800){
+                    System.out.println("rwet");
                     return true;
                 }
             }
