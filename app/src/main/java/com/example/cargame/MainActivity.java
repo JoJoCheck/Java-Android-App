@@ -19,9 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     protected void startGame(){
         Button startGameButton = findViewById(R.id.button);
-        ViewGroup group = findViewById(R.id.cl);
         startGameButton.setOnClickListener(v -> {
-            Game game = new Game(group);
+            Game game = new Game(this);
         });
     }
 }

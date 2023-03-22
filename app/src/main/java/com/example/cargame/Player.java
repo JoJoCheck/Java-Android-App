@@ -4,8 +4,11 @@ public class Player {
     //0: linke Spur, 1: mittlere Spur, 2: rechte Spur
     private int lane;
 
+    private int id;
+
     public Player(){
         this.lane = 1;
+        this.id = 45;
     }
 
     public int getLane() {
@@ -20,7 +23,7 @@ public class Player {
         }
     }
 
-    public void moveRigth(){
+    public void moveRight(){
         if (lane==0 || lane==1) {
             this.lane ++;
         }

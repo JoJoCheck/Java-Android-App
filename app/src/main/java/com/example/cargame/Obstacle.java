@@ -3,6 +3,8 @@ package com.example.cargame;
 public class Obstacle {
     private int position;
 
+    private int id;
+
     public Obstacle(){
         setPosition(200); //fester Wert ganz oben am Bildschrim
     }
@@ -11,5 +13,13 @@ public class Obstacle {
     }
     public int getPosition() {
         return position;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId(){
+        return id;
     }
 }
