@@ -195,7 +195,7 @@ public class Game {
             Button restart = group.findViewById(R.id.button);
             restart.setText("Restart");
             restart.setVisibility(View.VISIBLE);
-            new Game(activity);
+            //new Game(activity);
         }
 
 
@@ -206,7 +206,8 @@ public class Game {
         for (int i = 0; i < lanes.length; i++){
             if (player.getLane() != i) continue;
             for(Obstacle obstacle : lanes[i]){
-                if (obstacle.getPosition() <= 2000 && obstacle.getPosition() >= 2200){
+                System.out.println(obstacle.getPosition());
+                if (obstacle.getPosition() <= 700 && obstacle.getPosition() >= 800){
                     return true;
                 }
             }
@@ -274,6 +275,7 @@ public class Game {
                     params.leftMargin = secondLane;
 
                     view.requestLayout();
+                    view.setY(700);
                 }
         );
     }
