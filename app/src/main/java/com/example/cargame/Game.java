@@ -50,6 +50,7 @@ public class Game {
         points = 0;
         gameIsRunning = true;
      //   group.removeView(group.findViewById(R.id.button));
+        buttonChange();
 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
