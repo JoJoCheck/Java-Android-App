@@ -46,7 +46,7 @@ public class Game {
         this.group = activity.findViewById(R.id.cl);
         this.activity = activity;
         time = 0;
-        gameSpeed = 1;
+        gameSpeed = 3;
         points = 0;
         gameIsRunning = true;
      //   group.removeView(group.findViewById(R.id.button));
@@ -177,7 +177,7 @@ public class Game {
         for(int i = 0; i < lanes.length; i++){
             for (int j = 0; j < lanes[i].size(); j++){
                 Obstacle o = lanes[i].get(j);
-
+                if (findViewOfObstacle(o) == null) continue;
                 findViewOfObstacle(o).setY(o.getPosition());
 
             }
