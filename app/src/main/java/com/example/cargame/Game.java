@@ -30,7 +30,7 @@ public class Game {
     private Player player;
 
     public ViewGroup group;
-    public Random random;
+    public Random random = new Random();
 
     private Activity activity;
 
@@ -49,7 +49,7 @@ public class Game {
         points = 0;
         gameIsRunning = true;
      //   group.removeView(group.findViewById(R.id.button));
-
+        buttonChange();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -171,6 +171,16 @@ public class Game {
 
             }
         }
+
+    }
+
+    public void buttonChange(){
+        Button startGameButton = group.findViewById(R.id.button);
+        Button leftButton = group.findViewById(R.id.leftbutton);
+        Button rightButton = group.findViewById(R.id.rightbutton);
+        startGameButton.setVisibility(View.GONE);
+        leftButton.setVisibility(View.VISIBLE);
+        rightButton.setVisibility(View.VISIBLE);
 
     }
 
