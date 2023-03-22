@@ -38,7 +38,7 @@ public class Game {
     private ImageView original;
     private ViewGroup.LayoutParams layout;
 
-    private int firstLane = 220;
+    private int firstLane = 180;
     private int secondLane = firstLane+300;
     private int thirdLane = secondLane+300;
 
@@ -197,9 +197,6 @@ public class Game {
             restart.setVisibility(View.VISIBLE);
             //new Game(activity);
         }
-
-
-
     }
 
     public boolean collision(){
@@ -231,12 +228,13 @@ public class Game {
         }
 
         ImageView playerView = group.findViewById(R.id.player);
+        int offset = 32;
         switch (player.getLane()){
-            case 0: playerView.setX(firstLane);
+            case 0: playerView.setX(firstLane-offset);
             break;
-            case 1: playerView.setX(secondLane);
+            case 1: playerView.setX(secondLane-offset);
             break;
-            case 2: playerView.setX(thirdLane);
+            case 2: playerView.setX(thirdLane-offset);
         }
 
 
@@ -249,6 +247,5 @@ public class Game {
         startGameButton.setVisibility(View.GONE);
         leftButton.setVisibility(View.VISIBLE);
         rightButton.setVisibility(View.VISIBLE);
-
     }
 }
