@@ -22,6 +22,5 @@ public class MainActivity extends AppCompatActivity {
         startGameButton.setOnClickListener(v -> {
             Game game = new Game(this);
         });
-
     }
 }

@@ -1,9 +1,14 @@
 package com.example.cargame;
 
+import android.app.Activity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,17 +33,18 @@ public class Game {
     public ViewGroup group;
     public Random random;
 
+    private Activity activity;
 
-    public Game(ViewGroup group){
+
+    public Game(Activity activity){
 
 
         lanes[0] = new ArrayList<>();
         lanes[1] = new ArrayList<>();
         lanes[2] = new ArrayList<>();
         player = new Player();
-        this.group = group;
-        random = new Random();
-
+        this.group = activity.findViewById(R.id.cl);
+        this.activity = activity;
         time = 0;
         gameSpeed = 1;
         points = 0;
@@ -58,19 +64,21 @@ public class Game {
         addPoint();
         moveObstaclesDown();
         carCrash();
-        if(time % 10 == 0){
+        if(time % 100 == 0){
             addObstacleRandom();
         }
+
+        updateAll();
+
     }
     public void moveObstaclesDown(){
-        for(int i = 0; i < 3; i++) {
-            for (int j = 0; j < lanes[i].size(); j++) {
-                lanes[i].get(j).setPosition(lanes[i].get(j).getPosition() + gameSpeed);
-
-                //Position die vorherige plus eins setzen
-                if(lanes[i].get(j).getPosition() == 2400){
-                    removeObstacle(i, lanes[i].get(j));
-                    //Objekte wenn sie am Rand sind auf null setzen
+        for(int j = 0; j< 3; j++) {
+            for (int i = 0; i < lanes[j].size(); i++) {
+                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
+                //Position die vorherige plus Speed setzen
+                if(lanes[j].get(i).getPosition() == 2400){
+                    removeObstacle(j, lanes[j].get(i));
+                    //Objekte wenn sie am Rand sind entfernen
                 }
             }
         }
@@ -96,8 +104,21 @@ public class Game {
 
     public void addObstacle(int lane){
         if(lane < 0 || lane > 2){throw new RuntimeException("nicht vorhandene Lane");}
+
+        int id = View.generateViewId();
         Obstacle obst = new Obstacle();
+        obst.setId(id);
         lanes[lane].add(obst);
+
+        activity.runOnUiThread(
+                () -> {
+                    ImageView view = new ImageView(group.getContext());
+                    view.setImageResource(R.drawable.auto);
+                    view.setId(id);
+                    group.addView(view);
+                }
+        );
+
     }
     public void addObstacleRandom(){
         addObstacle(random.nextInt(3));
@@ -140,4 +161,22 @@ public class Game {
         }
         return false;
     }
+
+    public View findViewOfObstacle(Obstacle obst){
+        return group.findViewById(obst.getId());
+    }
+
+    public void updateAll(){
+
+        for(int i = 0; i < lanes.length; i++){
+            for (int j = 0; j < lanes[i].size(); i++){
+                Obstacle o = lanes[i].get(j);
+
+                findViewOfObstacle(o).setY(o.getPosition());
+
+            }
+        }
+
+    }
+
 }
