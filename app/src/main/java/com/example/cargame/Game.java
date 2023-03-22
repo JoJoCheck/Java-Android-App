@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -73,7 +74,7 @@ public class Game {
 
         time++;
 
-       // addPoint();
+        addPoint();
         moveObstaclesDown();
         carCrash();
         if(time % 100 == 0){
@@ -108,9 +109,13 @@ public class Game {
         } );
     }
     public void addPoint(){
-        EditText number = group.findViewById(R.id.editTextNumber2);
-        points++;
-        number.setText(Integer.toString(points));
+        activity.runOnUiThread(
+                () -> {
+                    TextView number = group.findViewById(R.id.pointScore);
+                    setPoints(getPoints()+1);
+                    number.setText(Integer.toString(getPoints()));
+                }
+        );
     }
 
 
