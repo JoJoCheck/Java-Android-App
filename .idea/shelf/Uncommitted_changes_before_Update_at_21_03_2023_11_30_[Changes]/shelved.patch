@@ -9,15 +9,15 @@ diff --git a/app/src/main/java/com/example/cargame/Game.java b/app/src/main/java
 --- a/app/src/main/java/com/example/cargame/Game.java	(revision d1c0455a22631ab2208e9ba6f5bdb804d5b98af0)
 +++ b/app/src/main/java/com/example/cargame/Game.java	(date 1679394566218)
 @@ -21,17 +21,20 @@
- 
+
          gameSpeed = 1;
          points = 0;
 +        gameIsRunning = true;
          this.loop();
      }
- 
+
      public void loop() {
- 
+
 -        System.out.println("Test");
 +
 +        moveObstaclesDown();

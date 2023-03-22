@@ -1,0 +1,53 @@
+Index: app/src/main/java/com/example/cargame/Obstacle.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\npublic class Obstacle {\r\n    private int position;\r\n\r\n    public Obstacle(int pos){\r\n\r\n        setPosition(pos);\r\n    }\r\n    public void setPosition(int position) {\r\n        this.position = position;\r\n    }\r\n    public int getPosition() {\r\n        return position;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/Obstacle.java b/app/src/main/java/com/example/cargame/Obstacle.java
+--- a/app/src/main/java/com/example/cargame/Obstacle.java	(revision 42aa9797dac353b293a89322566af2574efad35a)
++++ b/app/src/main/java/com/example/cargame/Obstacle.java	(date 1679390320206)
+@@ -3,9 +3,9 @@
+ public class Obstacle {
+     private int position;
+ 
+-    public Obstacle(int pos){
++    public Obstacle(){
+ 
+-        setPosition(pos);
++        this.position = 200; //fester Wert ganz oben am Bildschrim
+     }
+     public void setPosition(int position) {
+         this.position = position;
+Index: app/src/main/java/com/example/cargame/Game.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class Game {\r\n    public ArrayList<Obstacle>[] lanes = new ArrayList[3];\r\n\r\n    private int gameSpeed;\r\n    private int points;\r\n\r\n    public Game(){\r\n\r\n        lanes[0] = new ArrayList<>();\r\n        lanes[1] = new ArrayList<>();\r\n        lanes[2] = new ArrayList<>();\r\n\r\n        gameSpeed = 1;\r\n        points = 0;\r\n        this.loop();\r\n    }\r\n\r\n    public void loop() {\r\n\r\n        System.out.println(\"Test\");\r\n        try{\r\n\r\n            Thread.sleep(1000);\r\n            loop();\r\n        }catch(InterruptedException ex){\r\n            //do stuff\r\n        }\r\n    }\r\n\r\n\r\n    public void addObstacle(int lane){\r\n\r\n    }\r\n\r\n    public int getGameSpeed() {\r\n        return gameSpeed;\r\n    }\r\n\r\n    public void setGameSpeed(int gameSpeed) {\r\n        this.gameSpeed = gameSpeed;\r\n    }\r\n\r\n    public int getPoints(){\r\n        return points;\r\n    }\r\n\r\n    public void setPoints(int points){\r\n        this.points = points;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/Game.java b/app/src/main/java/com/example/cargame/Game.java
+--- a/app/src/main/java/com/example/cargame/Game.java	(revision 42aa9797dac353b293a89322566af2574efad35a)
++++ b/app/src/main/java/com/example/cargame/Game.java	(date 1679393013029)
+@@ -30,10 +30,19 @@
+             //do stuff
+         }
+     }
++    public void moveObstaclesDown(){
++        for(int j = 0; j< 3; j++) {
++            for (int i = 0; i < lanes[j].size(); i++) {
++                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() - 1);
++            }
++        }
++    }
+ 
+ 
+     public void addObstacle(int lane){
+-
++        if(lane < 0 || lane > 3){throw new RuntimeException("nicht vorhandene Lane");}
++        Obstacle obst = new Obstacle();
++        lanes[lane].add(obst);
+     }
+ 
+     public int getGameSpeed() {
