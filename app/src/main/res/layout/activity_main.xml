@@ -22,9 +22,9 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="50dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="29dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="200dp"
         android:src="@drawable/auto_grau"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
