@@ -1,0 +1,165 @@
+Index: app/src/main/java/com/example/cargame/Obstacle.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\npublic class Obstacle {\r\n    private int position;\r\n\r\n    public Obstacle(){\r\n\r\n        this.position = 200; //fester Wert ganz oben am Bildschrim\r\n    }\r\n    public void setPosition(int position) {\r\n        this.position = position;\r\n    }\r\n    public int getPosition() {\r\n        return position;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/Obstacle.java b/app/src/main/java/com/example/cargame/Obstacle.java
+--- a/app/src/main/java/com/example/cargame/Obstacle.java	(revision 72aa266be890b72ca8d8226db1b1177c0e8945a1)
++++ b/app/src/main/java/com/example/cargame/Obstacle.java	(date 1679399064139)
+@@ -4,8 +4,7 @@
+     private int position;
+ 
+     public Obstacle(){
+-
+-        this.position = 200; //fester Wert ganz oben am Bildschrim
++        setPosition(200); //fester Wert ganz oben am Bildschrim
+     }
+     public void setPosition(int position) {
+         this.position = position;
+Index: app/src/main/java/com/example/cargame/Game.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class Game {\r\n    public ArrayList<Obstacle>[] lanes = new ArrayList[3];\r\n\r\n    private int gameSpeed;\r\n    private int points;\r\n\r\n    private boolean gameIsRunning;\r\n\r\n    private int time = 0;\r\n\r\n    private Player player;\r\n\r\n    public Game(){\r\n\r\n        lanes[0] = new ArrayList<>();\r\n        lanes[1] = new ArrayList<>();\r\n        lanes[2] = new ArrayList<>();\r\n        player = new Player();\r\n\r\n        time = 0;\r\n        gameSpeed = 1;\r\n        points = 0;\r\n        gameIsRunning = true;\r\n        this.loop();\r\n    }\r\n\r\n    public void loop() {\r\n        time++;\r\n\r\n\r\n        moveObstaclesDown();\r\n        carCrash();\r\n        if(time > 10){\r\n            addObstacleRandom();\r\n            time = 0;\r\n        }\r\n        try{\r\n            Thread.sleep(1000);\r\n            if (gameIsRunning) loop();\r\n        }catch(InterruptedException ex){\r\n            throw new RuntimeException(\"idk\");\r\n        }\r\n    }\r\n    public void moveObstaclesDown(){\r\n        for(int j = 0; j< 3; j++) {\r\n            for (int i = 0; i < lanes[j].size(); i++) {\r\n                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() - gameSpeed);\r\n            }\r\n        }\r\n    }\r\n\r\n    public void addObstacle(int lane){\r\n        if(lane < 0 || lane > 2){throw new RuntimeException(\"nicht vorhandene Lane\");}\r\n        Obstacle obst = new Obstacle();\r\n        lanes[lane].add(obst);\r\n    }\r\n    public void addObstacleRandom(){\r\n        double lane = Math.random();\r\n        addObstacle((int) (lane * 2));\r\n    }\r\n\r\n    public int getGameSpeed() {\r\n        return gameSpeed;\r\n    }\r\n\r\n    public void setGameSpeed(int gameSpeed) {\r\n        this.gameSpeed = gameSpeed;\r\n    }\r\n\r\n    public int getPoints(){\r\n        return points;\r\n    }\r\n\r\n    public void setPoints(int points){\r\n        this.points = points;\r\n    }\r\n\r\n    public void carCrash() {\r\n        if (collision()) {\r\n            gameIsRunning = false;\r\n            System.out.println(\" -- Crash -- \");\r\n        }\r\n    }\r\n\r\n    public boolean collision(){\r\n        for (int i = 0; i < lanes.length; i++){\r\n            if (player.getLane() != i) continue;\r\n            for(Obstacle obstacle : lanes[i]){\r\n                if (obstacle.getPosition() <= 30 && obstacle.getPosition() >= 5){\r\n                    return true;\r\n                }\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/Game.java b/app/src/main/java/com/example/cargame/Game.java
+--- a/app/src/main/java/com/example/cargame/Game.java	(revision 72aa266be890b72ca8d8226db1b1177c0e8945a1)
++++ b/app/src/main/java/com/example/cargame/Game.java	(date 1679402038865)
+@@ -1,6 +1,12 @@
+ package com.example.cargame;
+ 
++import android.view.ViewGroup;
++import android.widget.ImageView;
++
+ import java.util.ArrayList;
++import java.util.Timer;
++import java.util.TimerTask;
++
+ 
+ public class Game {
+     public ArrayList<Obstacle>[] lanes = new ArrayList[3];
+@@ -8,24 +14,37 @@
+     private int gameSpeed;
+     private int points;
+ 
++    private Timer timer = new Timer();
++
+     private boolean gameIsRunning;
+ 
+     private int time = 0;
+ 
+     private Player player;
+ 
+-    public Game(){
++    public ViewGroup group;
++
++
++    public Game(ViewGroup group){
++
+ 
+         lanes[0] = new ArrayList<>();
+         lanes[1] = new ArrayList<>();
+         lanes[2] = new ArrayList<>();
+         player = new Player();
++        this.group = group;
+ 
+         time = 0;
+         gameSpeed = 1;
+         points = 0;
+         gameIsRunning = true;
+-        this.loop();
++
++        timer.scheduleAtFixedRate(new TimerTask() {
++            @Override
++            public void run() {
++                if (gameIsRunning) loop();
++            }
++        }, 10, 1000/30);
+     }
+ 
+     public void loop() {
+@@ -34,16 +53,10 @@
+ 
+         moveObstaclesDown();
+         carCrash();
+-        if(time > 10){
++        if(time % 10 == 0){
+             addObstacleRandom();
+-            time = 0;
+         }
+-        try{
+-            Thread.sleep(1000);
+-            if (gameIsRunning) loop();
+-        }catch(InterruptedException ex){
+-            throw new RuntimeException("idk");
+-        }
++
+     }
+     public void moveObstaclesDown(){
+         for(int j = 0; j< 3; j++) {
+@@ -90,7 +103,7 @@
+         for (int i = 0; i < lanes.length; i++){
+             if (player.getLane() != i) continue;
+             for(Obstacle obstacle : lanes[i]){
+-                if (obstacle.getPosition() <= 30 && obstacle.getPosition() >= 5){
++                if (obstacle.getPosition() <= 2000 && obstacle.getPosition() >= 2200){
+                     return true;
+                 }
+             }
+Index: app/src/main/java/com/example/cargame/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        startGame();\r\n    }\r\n\r\n    protected void startGame(){\r\n        Button startGameButton = findViewById(R.id.button);\r\n        startGameButton.setOnClickListener(v -> {\r\n            Game game = new Game();\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/MainActivity.java b/app/src/main/java/com/example/cargame/MainActivity.java
+--- a/app/src/main/java/com/example/cargame/MainActivity.java	(revision 72aa266be890b72ca8d8226db1b1177c0e8945a1)
++++ b/app/src/main/java/com/example/cargame/MainActivity.java	(date 1679400816016)
+@@ -4,6 +4,7 @@
+ 
+ import android.os.Bundle;
+ import android.view.View;
++import android.view.ViewGroup;
+ import android.widget.Button;
+ import android.widget.ImageView;
+ 
+@@ -13,14 +14,14 @@
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+-
+         startGame();
+     }
+ 
+     protected void startGame(){
+         Button startGameButton = findViewById(R.id.button);
++        ViewGroup group = findViewById(R.id.cl);
+         startGameButton.setOnClickListener(v -> {
+-            Game game = new Game();
++            Game game = new Game(group);
+         });
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView\"\r\n        android:layout_width=\"123dp\"\r\n        android:layout_height=\"69dp\"\r\n        android:layout_marginStart=\"31dp\"\r\n        android:layout_marginTop=\"29dp\"\r\n        android:src=\"@drawable/auto\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/auto\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Button\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 72aa266be890b72ca8d8226db1b1177c0e8945a1)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1679398587017)
+@@ -2,6 +2,7 @@
+ <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/cl"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     tools:context=".MainActivity">

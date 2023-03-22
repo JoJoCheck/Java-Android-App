@@ -1,0 +1,139 @@
+Index: app/src/main/java/com/example/cargame/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/MainActivity.java b/app/src/main/java/com/example/cargame/MainActivity.java
+--- a/app/src/main/java/com/example/cargame/MainActivity.java	(revision 1a6a8a1091ad39f4ba52adbd56bd479c171bf37f)
++++ b/app/src/main/java/com/example/cargame/MainActivity.java	(date 1679389722035)
+@@ -10,5 +10,7 @@
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
++
++        Game game = new Game();
+     }
+ }
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" project-jdk-name=\"Android API 33, extension level 5 Platform\" project-jdk-type=\"Android SDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 1a6a8a1091ad39f4ba52adbd56bd479c171bf37f)
++++ b/.idea/misc.xml	(date 1679388103945)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" project-jdk-name="Android API 33, extension level 5 Platform" project-jdk-type="Android SDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android API 33, extension level 5 Platform" project-jdk-type="Android SDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"GRADLE\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"#JAVA_HOME\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 1a6a8a1091ad39f4ba52adbd56bd479c171bf37f)
++++ b/.idea/gradle.xml	(date 1679388103954)
+@@ -1,12 +1,19 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+         <option name="testRunner" value="GRADLE" />
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="gradleJvm" value="#JAVA_HOME" />
++        <option name="gradleJvm" value="Embedded JDK" />
++        <option name="modules">
++          <set>
++            <option value="$PROJECT_DIR$" />
++            <option value="$PROJECT_DIR$/app" />
++          </set>
++        </option>
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: app/src/main/java/com/example/cargame/Game.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/Game.java b/app/src/main/java/com/example/cargame/Game.java
+new file mode 100644
+--- /dev/null	(date 1679389722043)
++++ b/app/src/main/java/com/example/cargame/Game.java	(date 1679389722043)
+@@ -0,0 +1,59 @@
++package com.example.cargame;
++
++import java.util.ArrayList;
++
++public class Game {
++    public ArrayList<Obstacle> firstLane;
++    public ArrayList<Obstacle> secondLane;
++    public ArrayList<Obstacle> thirdLane;
++
++    private int gameSpeed;
++    private int points;
++
++    public Game(){
++        firstLane = new ArrayList<Obstacle>();
++        secondLane = new ArrayList<Obstacle>();
++        thirdLane = new ArrayList<Obstacle>();
++
++        gameSpeed = 1;
++        points = 0;
++        this.loop();
++    }
++
++    public void loop() {
++
++
++        System.out.println("Test");
++        try{
++
++            Thread.sleep(1000);
++            loop();
++        }catch(InterruptedException ex){
++            //do stuff
++        }
++    }
++
++
++
++    public int getGameSpeed() {
++        return gameSpeed;
++    }
++
++    public void setGameSpeed(int gameSpeed) {
++        this.gameSpeed = gameSpeed;
++    }
++
++    public int getPoints(){
++        return points;
++    }
++
++    public void setPoints(int points){
++        this.points = points;
++    }
++
++
++    public static void main(String[] args) {
++        Game game = new Game();
++        game.loop();
++    }
++}
