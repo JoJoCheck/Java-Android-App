@@ -56,10 +56,9 @@ public class Game {
         gameIsRunning = true;
      //   group.removeView(group.findViewById(R.id.button));
         buttonChange();
-
+        player = new Player();
         original = group.findViewById(R.id.original_car);
         layout = original.getLayoutParams();
-        createPlayer();
         movePlayerLeft();
         movePlayerRight();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -118,6 +117,9 @@ public class Game {
         );
     }
 
+    public void addObstacleRandom(){
+        addObstacle(random.nextInt(3));
+    }
 
     public void addObstacle(int lane){
         if(lane < 0 || lane > 2){throw new RuntimeException("nicht vorhandene Lane");}
@@ -165,9 +167,7 @@ public class Game {
         );
 
     }
-    public void addObstacleRandom(){
-        addObstacle(random.nextInt(3));
-    }
+
     public void removeObstacle(int lane, Obstacle obst){
         lanes[lane].remove(obst);
     }
@@ -230,7 +230,7 @@ public class Game {
             }
         }
 
-        ImageView playerView = group.findViewById(player.getId());
+        ImageView playerView = group.findViewById(R.id.player);
         switch (player.getLane()){
             case 0: playerView.setX(firstLane);
             break;
@@ -250,33 +250,5 @@ public class Game {
         leftButton.setVisibility(View.VISIBLE);
         rightButton.setVisibility(View.VISIBLE);
 
-    }
-
-
-    public void createPlayer(){
-
-        int id = View.generateViewId();
-        this.player = new Player();
-        player.setId(id);
-        player.setLane(2);
-
-        activity.runOnUiThread(
-                () -> {
-                    ImageView view = new ImageView(group.getContext());
-                    view.setImageResource(R.drawable.player_rennauto);
-
-                    view.setId(id);
-                    view.setLayoutParams(new ViewGroup.LayoutParams(this.layout));
-                    group.addView(view);
-                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)view.getLayoutParams();
-                    params.leftToLeft = group.getId();
-                    params.topToTop = original.getId();
-
-                    params.leftMargin = secondLane;
-
-                    view.requestLayout();
-                    view.setY(700);
-                }
-        );
     }
 }
