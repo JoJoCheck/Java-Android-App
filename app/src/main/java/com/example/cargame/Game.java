@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -49,7 +50,7 @@ public class Game {
         points = 0;
         gameIsRunning = true;
      //   group.removeView(group.findViewById(R.id.button));
-        buttonChange();
+
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -61,7 +62,7 @@ public class Game {
     public void loop() {
         time++;
 
-
+        addPoint();
         moveObstaclesDown();
         carCrash();
         if(time % 100 == 0){
@@ -94,6 +95,11 @@ public class Game {
         moveLeftButton.setOnClickListener(v -> {
             player.moveLeft();
         } );
+    }
+    public void addPoint(){
+        EditText number = group.findViewById(R.id.editTextNumber2);
+        points++;
+        number.setText(Integer.toString(points));
     }
 
 
