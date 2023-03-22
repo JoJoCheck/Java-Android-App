@@ -1,5 +1,7 @@
 package com.example.cargame;
 
+import android.view.View;
+
 public class Player {
     //0: linke Spur, 1: mittlere Spur, 2: rechte Spur
     private int lane;
@@ -8,7 +10,6 @@ public class Player {
 
     public Player(){
         this.lane = 1;
-        this.id = 45;
     }
 
     public int getLane() {
@@ -33,5 +34,13 @@ public class Player {
         if (lane==1 || lane==2) {
             this.lane --;
         }
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId(){
+        return id;
     }
 }

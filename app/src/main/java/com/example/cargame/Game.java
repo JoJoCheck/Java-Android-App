@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -47,7 +48,6 @@ public class Game {
         lanes[0] = new ArrayList<>();
         lanes[1] = new ArrayList<>();
         lanes[2] = new ArrayList<>();
-        player = new Player();
         this.group = activity.findViewById(R.id.cl);
         this.activity = activity;
         time = 0;
@@ -59,19 +59,22 @@ public class Game {
 
         original = group.findViewById(R.id.original_car);
         layout = original.getLayoutParams();
-
+        createPlayer();
+        movePlayerLeft();
+        movePlayerRight();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 if (gameIsRunning) loop();
             }
-        }, 10, 1000/30);
+        }, 0, 1000/30);
     }
 
     public void loop() {
+
         time++;
 
-       // addPoint();
+        addPoint();
         moveObstaclesDown();
         carCrash();
         if(time % 100 == 0){
@@ -106,9 +109,13 @@ public class Game {
         } );
     }
     public void addPoint(){
-        EditText number = group.findViewById(R.id.editTextNumber2);
-        points++;
-        number.setText(Integer.toString(points));
+        activity.runOnUiThread(
+                () -> {
+                    TextView number = group.findViewById(R.id.pointScore);
+                    setPoints(getPoints()+1);
+                    number.setText(Integer.toString(getPoints()));
+                }
+        );
     }
 
 
@@ -188,7 +195,7 @@ public class Game {
             Button restart = group.findViewById(R.id.button);
             restart.setText("Restart");
             restart.setVisibility(View.VISIBLE);
-            new Game(activity);
+            //new Game(activity);
         }
 
 
@@ -199,7 +206,8 @@ public class Game {
         for (int i = 0; i < lanes.length; i++){
             if (player.getLane() != i) continue;
             for(Obstacle obstacle : lanes[i]){
-                if (obstacle.getPosition() <= 2000 && obstacle.getPosition() >= 2200){
+                System.out.println(obstacle.getPosition());
+                if (obstacle.getPosition() <= 700 && obstacle.getPosition() >= 800){
                     return true;
                 }
             }
@@ -222,6 +230,16 @@ public class Game {
             }
         }
 
+        ImageView playerView = group.findViewById(player.getId());
+        switch (player.getLane()){
+            case 0: playerView.setX(firstLane);
+            break;
+            case 1: playerView.setX(secondLane);
+            break;
+            case 2: playerView.setX(thirdLane);
+        }
+
+
     }
 
     public void buttonChange(){
@@ -234,4 +252,31 @@ public class Game {
 
     }
 
+
+    public void createPlayer(){
+
+        int id = View.generateViewId();
+        this.player = new Player();
+        player.setId(id);
+        player.setLane(2);
+
+        activity.runOnUiThread(
+                () -> {
+                    ImageView view = new ImageView(group.getContext());
+                    view.setImageResource(R.drawable.player_rennauto);
+
+                    view.setId(id);
+                    view.setLayoutParams(new ViewGroup.LayoutParams(this.layout));
+                    group.addView(view);
+                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)view.getLayoutParams();
+                    params.leftToLeft = group.getId();
+                    params.topToTop = original.getId();
+
+                    params.leftMargin = secondLane;
+
+                    view.requestLayout();
+                    view.setY(700);
+                }
+        );
+    }
 }
