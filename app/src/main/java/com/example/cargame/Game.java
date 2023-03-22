@@ -149,6 +149,11 @@ public class Game {
             gameIsRunning = false;
             System.out.println(" -- Crash -- ");
         }
+        Button restart = group.findViewById(R.id.button);
+        restart.setText("Restart");
+        restart.setVisibility(View.VISIBLE);
+        //new Game(activity);
+
     }
 
     public boolean collision(){
