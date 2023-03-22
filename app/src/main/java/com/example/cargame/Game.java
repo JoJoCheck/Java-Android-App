@@ -6,9 +6,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -35,9 +32,11 @@ public class Game {
 
     private Activity activity;
 
+    private ImageView original;
+    private ViewGroup.LayoutParams layout;
+
 
     public Game(Activity activity){
-
 
         lanes[0] = new ArrayList<>();
         lanes[1] = new ArrayList<>();
@@ -51,6 +50,9 @@ public class Game {
         gameIsRunning = true;
      //   group.removeView(group.findViewById(R.id.button));
         buttonChange();
+
+        original = group.findViewById(R.id.original_car);
+        layout = original.getLayoutParams();
 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -106,7 +108,6 @@ public class Game {
 
     public void addObstacle(int lane){
         if(lane < 0 || lane > 2){throw new RuntimeException("nicht vorhandene Lane");}
-
         int id = View.generateViewId();
         Obstacle obst = new Obstacle();
         obst.setId(id);
@@ -115,8 +116,19 @@ public class Game {
         activity.runOnUiThread(
                 () -> {
                     ImageView view = new ImageView(group.getContext());
-                    view.setImageResource(R.drawable.auto);
+                    switch (random.nextInt(3)){
+                        case 0:
+                            view.setImageResource(R.drawable.auto_blau_final);
+                            break;
+                        case 1:
+                            view.setImageResource(R.drawable.auto_gr_n);
+                            break;
+                        case 2:
+                            view.setImageResource(R.drawable.auto_rot_final);
+                            break;
+                    }
                     view.setId(id);
+                    view.setLayoutParams(new ViewGroup.LayoutParams(this.layout));
                     group.addView(view);
                 }
         );

@@ -2,16 +2,12 @@ package com.example.cargame;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 
-import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        original = findViewById(R.id.imageView);
+        original = findViewById(R.id.original_car);
 
         layout = original.getLayoutParams();
 
@@ -34,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         auto1.setImageResource(R.drawable.auto_gr_n);
         auto2 = new ImageView(this);
         auto2.setImageResource(R.drawable.auto_gr_n);
-        Button button = findViewById(R.id.button);
 
         auto1.setX(-50);
         auto1.setId(View.generateViewId());
@@ -51,13 +46,12 @@ public class MainActivity extends AppCompatActivity {
         constraintLayout.addView(auto2);
 
         int firstLane = 220;
-        int secondLane = 520;
-        int thirdLane = 820;
+        int secondLane = firstLane+300;
+        int thirdLane = secondLane+300;
 
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)auto1.getLayoutParams();
         params.leftToLeft = constraintLayout.getId();
         params.topToTop = original.getId();
-        //params.bottomToBottom = original.getId();
         params.leftMargin = secondLane;
         auto1.requestLayout();
 
