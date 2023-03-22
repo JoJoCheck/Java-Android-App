@@ -39,11 +39,11 @@ public class Game {
     private ViewGroup.LayoutParams layout;
 
     private int firstLane = 180;
-    private int secondLane = firstLane+300;
-    private int thirdLane = secondLane+300;
+    private int secondLane = firstLane + 300;
+    private int thirdLane = secondLane + 300;
 
 
-    public Game(Activity activity){
+    public Game(Activity activity) {
 
         lanes[0] = new ArrayList<>();
         lanes[1] = new ArrayList<>();
@@ -54,7 +54,7 @@ public class Game {
         gameSpeed = 10;
         points = 0;
         gameIsRunning = true;
-     //   group.removeView(group.findViewById(R.id.button));
+        //   group.removeView(group.findViewById(R.id.button));
         buttonChange();
         player = new Player();
         original = group.findViewById(R.id.original_car);
@@ -66,7 +66,7 @@ public class Game {
             public void run() {
                 if (gameIsRunning) loop();
             }
-        }, 0, 1000/30);
+        }, 0, 1000 / 30);
     }
 
     public void loop() {
@@ -76,54 +76,60 @@ public class Game {
         addPoint();
         moveObstaclesDown();
         carCrash();
-        if(time % 100 == 0){
+        if (time % 100 == 0) {
             addObstacleRandom();
         }
 
         updateAll();
 
     }
-    public void moveObstaclesDown(){
-        for(int j = 0; j< 3; j++) {
+
+    public void moveObstaclesDown() {
+        for (int j = 0; j < 3; j++) {
             for (int i = 0; i < lanes[j].size(); i++) {
                 lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
                 //Position die vorherige plus Speed setzen
-                if(lanes[j].get(i).getPosition() == 2400){
+                if (lanes[j].get(i).getPosition() == 2400) {
                     removeObstacle(j, lanes[j].get(i));
                     //Objekte wenn sie am Rand sind entfernen
                 }
             }
         }
     }
-    public void movePlayerRight(){
+
+    public void movePlayerRight() {
         Button moveRightButton = group.findViewById(R.id.rightbutton);
-        moveRightButton.setOnClickListener (v -> {
+        moveRightButton.setOnClickListener(v -> {
             player.moveRight();
-        } );
+        });
     }
-    public void movePlayerLeft(){
+
+    public void movePlayerLeft() {
         Button moveLeftButton = group.findViewById(R.id.leftbutton);
         moveLeftButton.setOnClickListener(v -> {
             player.moveLeft();
-        } );
+        });
     }
-    public void addPoint(){
+
+    public void addPoint() {
         activity.runOnUiThread(
                 () -> {
                     TextView number = group.findViewById(R.id.pointScore);
-                    setPoints(getPoints()+1);
+                    setPoints(getPoints() + 1);
                     number.setText(Integer.toString(getPoints()));
                 }
         );
     }
 
-    public void addObstacleRandom(){
+    public void addObstacleRandom() {
         addObstacle(random.nextInt(3));
         System.out.println("new");
     }
 
-    public void addObstacle(int lane){
-        if(lane < 0 || lane > 2){throw new RuntimeException("nicht vorhandene Lane");}
+    public void addObstacle(int lane) {
+        if (lane < 0 || lane > 2) {
+            throw new RuntimeException("nicht vorhandene Lane");
+        }
         int id = View.generateViewId();
         Obstacle obst = new Obstacle();
         obst.setId(id);
@@ -132,7 +138,7 @@ public class Game {
         activity.runOnUiThread(
                 () -> {
                     ImageView view = new ImageView(group.getContext());
-                    switch (random.nextInt(4)){
+                    switch (random.nextInt(4)) {
                         case 0:
                             view.setImageResource(R.drawable.auto_blau_final);
                             break;
@@ -149,10 +155,10 @@ public class Game {
                     view.setId(id);
                     view.setLayoutParams(new ViewGroup.LayoutParams(this.layout));
                     group.addView(view);
-                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)view.getLayoutParams();
+                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) view.getLayoutParams();
                     params.leftToLeft = group.getId();
                     params.topToTop = original.getId();
-                    switch (lane){
+                    switch (lane) {
                         case 0:
                             params.leftMargin = firstLane;
                             break;
@@ -169,10 +175,10 @@ public class Game {
 
     }
 
-    public void removeObstacle(int lane, Obstacle obst){
+    public void removeObstacle(int lane, Obstacle obst) {
         lanes[lane].remove(obst);
         activity.runOnUiThread(
-                ()-> {
+                () -> {
                     group.removeView(group.findViewById(obst.getId()));
                 }
         );
@@ -188,11 +194,11 @@ public class Game {
         this.gameSpeed = gameSpeed;
     }
 
-    public int getPoints(){
+    public int getPoints() {
         return points;
     }
 
-    public void setPoints(int points){
+    public void setPoints(int points) {
         this.points = points;
     }
 
@@ -207,27 +213,23 @@ public class Game {
         }
     }
 
-    public boolean collision(){
-        for (int i = 0; i < lanes.length; i++){
-            if (player.getLane() != i) continue;
-            for(Obstacle obstacle : lanes[i]){
-                if (obstacle.getPosition() >= 900 && obstacle.getPosition() <= 1000){
-                    System.out.println("rwet");
-                    return true;
-                }
+    public boolean collision() {
+        for (Obstacle obstacle : lanes[player.getLane()]) {
+            if (obstacle.getPosition() >= 1100 && obstacle.getPosition() <= 1170) {
+                return true;
             }
         }
         return false;
     }
 
-    public View findViewOfObstacle(Obstacle obst){
+    public View findViewOfObstacle(Obstacle obst) {
         return group.findViewById(obst.getId());
     }
 
-    public void updateAll(){
+    public void updateAll() {
 
-        for(int i = 0; i < lanes.length; i++){
-            for (int j = 0; j < lanes[i].size(); j++){
+        for (int i = 0; i < lanes.length; i++) {
+            for (int j = 0; j < lanes[i].size(); j++) {
                 Obstacle o = lanes[i].get(j);
                 if (findViewOfObstacle(o) == null) continue;
                 findViewOfObstacle(o).setY(o.getPosition());
@@ -237,18 +239,21 @@ public class Game {
 
         ImageView playerView = group.findViewById(R.id.player);
         int offset = 32;
-        switch (player.getLane()){
-            case 0: playerView.setX(firstLane-offset);
-            break;
-            case 1: playerView.setX(secondLane-offset);
-            break;
-            case 2: playerView.setX(thirdLane-offset);
+        switch (player.getLane()) {
+            case 0:
+                playerView.setX(firstLane - offset);
+                break;
+            case 1:
+                playerView.setX(secondLane - offset);
+                break;
+            case 2:
+                playerView.setX(thirdLane - offset);
         }
 
 
     }
 
-    public void buttonChange(){
+    public void buttonChange() {
         Button startGameButton = group.findViewById(R.id.button);
         Button leftButton = group.findViewById(R.id.leftbutton);
         Button rightButton = group.findViewById(R.id.rightbutton);
