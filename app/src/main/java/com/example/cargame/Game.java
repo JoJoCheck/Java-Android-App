@@ -112,13 +112,11 @@ public class Game {
     }
 
     public void addPoint() {
-        activity.runOnUiThread(
-                () -> {
-                    TextView number = group.findViewById(R.id.pointScore);
-                    setPoints(getPoints() + 1);
-                    number.setText(Integer.toString(getPoints()));
-                }
-        );
+        activity.runOnUiThread(() -> {
+            TextView number = group.findViewById(R.id.pointScore);
+            setPoints(getPoints() + 1);
+            number.setText(Integer.toString(getPoints()));
+        });
     }
 
     public void addObstacleRandom() {
@@ -135,53 +133,49 @@ public class Game {
         obst.setId(id);
         lanes[lane].add(obst);
 
-        activity.runOnUiThread(
-                () -> {
-                    ImageView view = new ImageView(group.getContext());
-                    switch (random.nextInt(4)) {
-                        case 0:
-                            view.setImageResource(R.drawable.auto_blau_final);
-                            break;
-                        case 1:
-                            view.setImageResource(R.drawable.auto_gr_n);
-                            break;
-                        case 2:
-                            view.setImageResource(R.drawable.auto_rot_final);
-                            break;
-                        case 3:
-                            view.setImageResource(R.drawable.auto_grau);
-                            break;
-                    }
-                    view.setId(id);
-                    view.setLayoutParams(new ViewGroup.LayoutParams(this.layout));
-                    group.addView(view);
-                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) view.getLayoutParams();
-                    params.leftToLeft = group.getId();
-                    params.topToTop = original.getId();
-                    switch (lane) {
-                        case 0:
-                            params.leftMargin = firstLane;
-                            break;
-                        case 1:
-                            params.leftMargin = secondLane;
-                            break;
-                        case 2:
-                            params.leftMargin = thirdLane;
-                            break;
-                    }
-                    view.requestLayout();
-                }
-        );
+        activity.runOnUiThread(() -> {
+            ImageView view = new ImageView(group.getContext());
+            switch (random.nextInt(4)) {
+                case 0:
+                    view.setImageResource(R.drawable.auto_blau_final);
+                    break;
+                case 1:
+                    view.setImageResource(R.drawable.auto_gr_n);
+                    break;
+                case 2:
+                    view.setImageResource(R.drawable.auto_rot_final);
+                    break;
+                case 3:
+                    view.setImageResource(R.drawable.auto_grau);
+                    break;
+            }
+            view.setId(id);
+            view.setLayoutParams(new ViewGroup.LayoutParams(this.layout));
+            group.addView(view);
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) view.getLayoutParams();
+            params.leftToLeft = group.getId();
+            params.topToTop = original.getId();
+            switch (lane) {
+                case 0:
+                    params.leftMargin = firstLane;
+                    break;
+                case 1:
+                    params.leftMargin = secondLane;
+                    break;
+                case 2:
+                    params.leftMargin = thirdLane;
+                    break;
+            }
+            view.requestLayout();
+        });
 
     }
 
     public void removeObstacle(int lane, Obstacle obst) {
         lanes[lane].remove(obst);
-        activity.runOnUiThread(
-                () -> {
-                    group.removeView(group.findViewById(obst.getId()));
-                }
-        );
+        activity.runOnUiThread(() -> {
+            group.removeView(group.findViewById(obst.getId()));
+        });
 
         System.out.println("removed");
     }
@@ -206,16 +200,19 @@ public class Game {
         if (collision()) {
             gameIsRunning = false;
             System.out.println(" -- Crash -- ");
-            Button restart = group.findViewById(R.id.button);
-            restart.setText("Restart");
-            restart.setVisibility(View.VISIBLE);
+            activity.runOnUiThread(() -> {
+                        Button restart = group.findViewById(R.id.button);
+                        restart.setText("Restart");
+                        restart.setVisibility(View.VISIBLE);
+                    }
+            );
             //new Game(activity);
         }
     }
 
     public boolean collision() {
         for (Obstacle obstacle : lanes[player.getLane()]) {
-            if (obstacle.getPosition() >= 1100 && obstacle.getPosition() <= 1170) {
+            if (obstacle.getPosition() >= 1100 && obstacle.getPosition() <= 1500) {
                 return true;
             }
         }
