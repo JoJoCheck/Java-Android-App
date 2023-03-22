@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
@@ -34,6 +36,10 @@ public class Game {
 
     private ImageView original;
     private ViewGroup.LayoutParams layout;
+
+    private int firstLane = 220;
+    private int secondLane = firstLane+300;
+    private int thirdLane = secondLane+300;
 
 
     public Game(Activity activity){
@@ -116,7 +122,7 @@ public class Game {
         activity.runOnUiThread(
                 () -> {
                     ImageView view = new ImageView(group.getContext());
-                    switch (random.nextInt(3)){
+                    switch (random.nextInt(4)){
                         case 0:
                             view.setImageResource(R.drawable.auto_blau_final);
                             break;
@@ -126,10 +132,28 @@ public class Game {
                         case 2:
                             view.setImageResource(R.drawable.auto_rot_final);
                             break;
+                        case 3:
+                            view.setImageResource(R.drawable.auto_grau);
+                            break;
                     }
                     view.setId(id);
                     view.setLayoutParams(new ViewGroup.LayoutParams(this.layout));
                     group.addView(view);
+                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)view.getLayoutParams();
+                    params.leftToLeft = group.getId();
+                    params.topToTop = original.getId();
+                    switch (lane){
+                        case 0:
+                            params.leftMargin = firstLane;
+                            break;
+                        case 1:
+                            params.leftMargin = secondLane;
+                            break;
+                        case 2:
+                            params.leftMargin = thirdLane;
+                            break;
+                    }
+                    view.requestLayout();
                 }
         );
 

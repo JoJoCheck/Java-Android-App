@@ -1,0 +1,28 @@
+Index: app/src/main/java/com/example/cargame/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.constraintlayout.widget.ConstraintLayout;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\nimport android.widget.Toast;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    private ImageView auto1;\r\n    private ImageView auto2;\r\n    private ViewGroup.LayoutParams layout;\r\n    private ImageView original;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        original = findViewById(R.id.original_car);\r\n\r\n        layout = original.getLayoutParams();\r\n\r\n        auto1 = new ImageView(this);\r\n        auto1.setImageResource(R.drawable.auto_gr_n);\r\n        auto2 = new ImageView(this);\r\n        auto2.setImageResource(R.drawable.auto_gr_n);\r\n\r\n        auto1.setX(-50);\r\n        auto1.setId(View.generateViewId());\r\n        //auto2.setX(300);\r\n        String s = \"\" + layout.width;\r\n        Toast toast = Toast.makeText(this, s, Toast.LENGTH_SHORT);\r\n        toast.show();\r\n\r\n        auto1.setLayoutParams(new ViewGroup.LayoutParams(layout));\r\n        auto2.setLayoutParams(new ViewGroup.LayoutParams(layout));\r\n\r\n        ConstraintLayout constraintLayout = findViewById(R.id.cl);\r\n        constraintLayout.addView(auto1);\r\n        constraintLayout.addView(auto2);\r\n\r\n        int firstLane = 220;\r\n        int secondLane = firstLane+300;\r\n        int thirdLane = secondLane+300;\r\n\r\n        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)auto1.getLayoutParams();\r\n        params.leftToLeft = constraintLayout.getId();\r\n        params.topToTop = original.getId();\r\n        params.leftMargin = secondLane;\r\n        auto1.requestLayout();\r\n\r\n        startGame();\r\n    }\r\n\r\n    protected void startGame(){\r\n        Button startGameButton = findViewById(R.id.button);\r\n        startGameButton.setOnClickListener(v -> {\r\n            Game game = new Game(this);\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/MainActivity.java b/app/src/main/java/com/example/cargame/MainActivity.java
+--- a/app/src/main/java/com/example/cargame/MainActivity.java	(revision 4de11c105ff66ae7623b7c539afe272fcc42e7af)
++++ b/app/src/main/java/com/example/cargame/MainActivity.java	(date 1679479392911)
+@@ -22,7 +22,7 @@
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+ 
+-        original = findViewById(R.id.original_car);
++        /*original = findViewById(R.id.original_car);
+ 
+         layout = original.getLayoutParams();
+ 
+@@ -53,7 +53,7 @@
+         params.leftToLeft = constraintLayout.getId();
+         params.topToTop = original.getId();
+         params.leftMargin = secondLane;
+-        auto1.requestLayout();
++        auto1.requestLayout();*/
+ 
+         startGame();
+     }
