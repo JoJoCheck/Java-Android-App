@@ -62,7 +62,7 @@ public class Game {
     public void loop() {
         time++;
 
-        addPoint();
+       // addPoint();
         moveObstaclesDown();
         carCrash();
         if(time % 100 == 0){
@@ -170,7 +170,7 @@ public class Game {
     public void updateAll(){
 
         for(int i = 0; i < lanes.length; i++){
-            for (int j = 0; j < lanes[i].size(); i++){
+            for (int j = 0; j < lanes[i].size(); j++){
                 Obstacle o = lanes[i].get(j);
 
                 findViewOfObstacle(o).setY(o.getPosition());
