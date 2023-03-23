@@ -17,8 +17,6 @@ import java.util.TimerTask;
 
 
 public class Game {
-
-    private int JonaCounter;
     public ArrayList<Obstacle>[] lanes = new ArrayList[3];
 
     private int gameSpeed;
@@ -127,8 +125,6 @@ public class Game {
     public void addObstacleRandom() {
         addObstacle(random.nextInt(3));
         System.out.println("new");
-        JonaCounter++;
-        System.out.println(JonaCounter);
     }
 
     public void addObstacle(int lane) {
