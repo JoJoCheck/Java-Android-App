@@ -1,0 +1,217 @@
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\nplugins {\r\n    id 'com.android.application' version '7.4.2' apply false\r\n    id 'com.android.library' version '7.4.2' apply false\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	(revision 8fca8c512ce55cde8244416c8cf4e2b8f10b9afb)
++++ b/build.gradle	(date 1679495708404)
+@@ -2,4 +2,22 @@
+ plugins {
+     id 'com.android.application' version '7.4.2' apply false
+     id 'com.android.library' version '7.4.2' apply false
++//    buildscript {
++//
++//        repositories {
++//
++//            mavenCentral()
++//
++//        }
++//
++//    }
++//    allprojects {
++//
++//        repositories {
++//
++//            mavenCentral()
++//
++//        }
++//
++//    }
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/cl\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"@drawable/hintergrundv2\"\r\n    tools:actionBarNavMode=\"standard\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/banner\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"150dp\"\r\n        android:layout_marginBottom=\"-40dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.505\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:srcCompat=\"@drawable/bannerv7\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/original_car\"\r\n        android:layout_width=\"50dp\"\r\n        android:layout_height=\"70dp\"\r\n        android:layout_marginStart=\"65dp\"\r\n        android:layout_marginTop=\"-100dp\"\r\n        android:src=\"@drawable/auto_grau\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/auto_grau\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Button\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/rightbutton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginEnd=\"40dp\"\r\n        android:layout_marginBottom=\"40dp\"\r\n        android:layout_weight=\"1\"\r\n        android:text=\"right\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/leftbutton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"40dp\"\r\n        android:layout_marginBottom=\"40dp\"\r\n        android:layout_weight=\"1\"\r\n        android:text=\"left\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/pointScore\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"24dp\"\r\n        android:layout_marginEnd=\"32dp\"\r\n        android:text=\"Score: 0\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/player\"\r\n        android:layout_width=\"70dp\"\r\n        android:layout_height=\"110dp\"\r\n        android:layout_marginBottom=\"130dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:srcCompat=\"@drawable/player_rennauto\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 8fca8c512ce55cde8244416c8cf4e2b8f10b9afb)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1679496045826)
+@@ -20,6 +20,12 @@
+         app:layout_constraintStart_toStartOf="parent"
+         app:srcCompat="@drawable/bannerv7" />
+ 
++<!--    <pl.droidsonroids.gif.GifImageView-->
++<!--        android:layout_width="match_parent"-->
++<!--        android:layout_height="match_parent"-->
++<!--        android:background="#fff"-->
++<!--        android:src="@drawable/giphy" />-->
++
+     <ImageView
+         android:id="@+id/original_car"
+         android:layout_width="50dp"
+@@ -40,6 +46,24 @@
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
++    <ImageView
++        android:id="@+id/imageview"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintLeft_toLeftOf="parent"
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++
++    <WebView
++        android:id="@+id/webvidew"
++        android:layout_width="285dp"
++        android:layout_height="264dp"
++        android:layout_marginStart="40dp"
++        android:layout_marginTop="50dp"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
+ 
+     <Button
+         android:id="@+id/rightbutton"
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.CarGame\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 8fca8c512ce55cde8244416c8cf4e2b8f10b9afb)
++++ b/app/src/main/AndroidManifest.xml	(date 1679496411167)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools">
+-
++    <uses-permission android:name="android.permission.INTERNET"/>
+     <application
+         android:allowBackup="true"
+         android:dataExtractionRules="@xml/data_extraction_rules"
+@@ -22,4 +22,4 @@
+         </activity>
+     </application>
+ 
+-</manifest>
+\ No newline at end of file
++</manifest>
+Index: app/src/main/java/com/example/cargame/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.constraintlayout.widget.ConstraintLayout;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\nimport android.widget.Toast;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        /*ViewGroup group = findViewById(R.id.cl);\r\n        ImageView original = findViewById(R.id.original_car);\r\n        ViewGroup.LayoutParams layout = original.getLayoutParams();\r\n        int firstLane = 220;\r\n        int id = View.generateViewId();\r\n\r\n        ImageView view = new ImageView(this);\r\n        view.setImageResource(R.drawable.auto_blau_final);\r\n        view.setId(id);\r\n        view.setLayoutParams(new ViewGroup.LayoutParams(layout));\r\n        group.addView(view);\r\n        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)view.getLayoutParams();\r\n        params.leftToLeft = group.getId();\r\n        params.topToTop = original.getId();\r\n        view.requestLayout();\r\n        /*ImageView banner = findViewById(R.id.original_car);\r\n        String s = \"\" + banner.getTranslationZ();\r\n        Toast toast = Toast.makeText(this, s, Toast.LENGTH_SHORT);\r\n        toast.show();*/\r\n\r\n        startGame();\r\n    }\r\n\r\n    protected void startGame(){\r\n        Button startGameButton = findViewById(R.id.button);\r\n        startGameButton.setOnClickListener(v -> {\r\n            Game game = new Game(this);\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/MainActivity.java b/app/src/main/java/com/example/cargame/MainActivity.java
+--- a/app/src/main/java/com/example/cargame/MainActivity.java	(revision 8fca8c512ce55cde8244416c8cf4e2b8f10b9afb)
++++ b/app/src/main/java/com/example/cargame/MainActivity.java	(date 1679496714398)
+@@ -6,15 +6,32 @@
+ import android.os.Bundle;
+ import android.view.View;
+ import android.view.ViewGroup;
++import android.webkit.WebView;
++import android.webkit.WebViewClient;
+ import android.widget.Button;
+ import android.widget.ImageView;
+ import android.widget.Toast;
++//import com.bumptech.glide.Glide;
+ 
+ public class MainActivity extends AppCompatActivity {
++    WebView webView;
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
++       // Glide.with(this).load(R.drawable.giphy).into(imageView);
++
++        // initialise the layout
++        webView = findViewById(R.id.webvidew);
++
++        // enable the javascript to load the url
++        webView.getSettings().setJavaScriptEnabled(true);
++        webView.setWebViewClient(new WebViewClient());
++
++        // add the url of gif
++        webView.loadUrl("https://i.gifer.com/origin/a0/a07ad08920f303f655251b1a0b353b86_w200.gif");
++        // https://www.youtube.com/watch?v=dQw4w9WgXcQ
++
+ 
+         /*ViewGroup group = findViewById(R.id.cl);
+         ImageView original = findViewById(R.id.original_car);
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nandroid {\r\n    namespace 'com.example.cargame'\r\n    compileSdk 33\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.cargame\"\r\n        minSdk 19\r\n        targetSdk 33\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'androidx.appcompat:appcompat:1.6.1'\r\n    implementation 'com.google.android.material:material:1.8.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.5'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision 8fca8c512ce55cde8244416c8cf4e2b8f10b9afb)
++++ b/app/build.gradle	(date 1679495708398)
+@@ -36,4 +36,6 @@
+     testImplementation 'junit:junit:4.13.2'
+     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
++    //implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
++    //implementation 'com.github.bumptech.glide:glide:4.9.0'
+ }
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android API 33, extension level 5 Platform\" project-jdk-type=\"Android SDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 8fca8c512ce55cde8244416c8cf4e2b8f10b9afb)
++++ b/.idea/misc.xml	(date 1679495637132)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android API 33, extension level 5 Platform" project-jdk-type="Android SDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="Android API 33, extension level 5 Platform" project-jdk-type="Android SDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/deploymentTargetDropDown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+new file mode 100644
+--- /dev/null	(date 1679495891237)
++++ b/.idea/deploymentTargetDropDown.xml	(date 1679495891237)
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="deploymentTargetDropDown">
++    <runningDeviceTargetSelectedWithDropDown>
++      <Target>
++        <type value="RUNNING_DEVICE_TARGET" />
++        <deviceKey>
++          <Key>
++            <type value="SERIAL_NUMBER" />
++            <value value="WCR7N18408003697" />
++          </Key>
++        </deviceKey>
++      </Target>
++    </runningDeviceTargetSelectedWithDropDown>
++    <timeTargetWasSelectedWithDropDown value="2023-03-22T14:35:33.044166700Z" />
++  </component>
++</project>
+\ No newline at end of file
