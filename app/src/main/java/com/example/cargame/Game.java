@@ -98,7 +98,7 @@ public class Game {
             for (int i = 0; i < lanes[j].size(); i++) {
                 lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
                 //Position die vorherige plus Speed setzen
-                if (lanes[j].get(i).getPosition() == 2400) {
+                if (lanes[j].get(i).getPosition() >= 1800) {
                     removeObstacle(j, lanes[j].get(i));
                     //Objekte wenn sie am Rand sind entfernen
                 }
