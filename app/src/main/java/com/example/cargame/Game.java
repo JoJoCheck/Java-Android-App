@@ -223,6 +223,7 @@ public class Game {
                                     removeAll();
                                     player.setLane(1);
                                     new Game(activity);
+                                    group.findViewById(R.id.gif).setVisibility(View.GONE);
                                 }
                         );
                     }
