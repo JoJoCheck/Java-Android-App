@@ -80,7 +80,9 @@ public class Game {
                     try {
                         //System.out.println(Thread.getAllStackTraces().keySet().toString());
                         Thread.sleep(1000 / 30);
-                        loop();
+                        activity.runOnUiThread(() -> {
+                            loop();
+                        });
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
