@@ -78,7 +78,7 @@ public class Game {
             public void run() {
                 while (gameIsRunning) {
                     try {
-                        //System.out.println(Thread.getAllStackTraces().keySet().toString());
+
                         Thread.sleep(1000 / 30);
                         activity.runOnUiThread(() -> {
                             loop();
@@ -139,7 +139,6 @@ public class Game {
 
     public void addObstacleRandom() {
         addObstacle(random.nextInt(3));
-        System.out.println("new");
     }
 
     public void addObstacle(int lane) {
@@ -195,16 +194,6 @@ public class Game {
             group.findViewById(obst.getId()).setVisibility(View.GONE);
             group.removeView(group.findViewById(obst.getId()));
         });
-
-        System.out.println("removed");
-    }
-
-    public int getGameSpeed() {
-        return gameSpeed;
-    }
-
-    public void setGameSpeed(int gameSpeed) {
-        this.gameSpeed = gameSpeed;
     }
 
     public int getPoints() {
@@ -218,7 +207,6 @@ public class Game {
     public void carCrash() {
         if (collision()) {
             gameIsRunning = false;
-            System.out.println(" -- Crash -- ");
 
             safeInt(highScore);
             activity.runOnUiThread(() -> {
@@ -226,8 +214,6 @@ public class Game {
                         highscoreBoard.setText("Highscore:" + Integer.toString(highScore));
                         highscoreBoard.setVisibility(View.VISIBLE);
             });
-
-            System.out.println("HS: " + highScore);
 
             activity.runOnUiThread(() -> {
                         Button restart = group.findViewById(R.id.button);
