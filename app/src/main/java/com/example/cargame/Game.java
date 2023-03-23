@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,9 +21,11 @@ import java.util.TimerTask;
 
 public class Game {
     public ArrayList<Obstacle>[] lanes = new ArrayList[3];
-
-    private int gameSpeed;
     private int points;
+    private int spawnRate;
+    public static int minSpeed = 25;
+
+    public static int maxSpeed = 57;
 
     private Timer timer = new Timer();
 
@@ -59,14 +60,14 @@ public class Game {
         this.group = activity.findViewById(R.id.cl);
         this.activity = activity;
         time = 0;
-        gameSpeed = 20;
         points = 0;
+        spawnRate = 40;
         gameIsRunning = true;
         highScore = loadInt();
         //   group.removeView(group.findViewById(R.id.button));
         buttonChange();
         playerView = group.findViewById(R.id.player);
-        explosion = group.findViewById(R.id.gif);
+        explosion = group.findViewById(R.id.explosion);
         Glide.with(activity).asGif().load(R.drawable._a9n).into(explosion);
         player = new Player();
         original = group.findViewById(R.id.original_car);
@@ -98,7 +99,7 @@ public class Game {
         addPoint();
         moveObstaclesDown();
         carCrash();
-        if (time % 40 == 0) {
+        if (time % spawnRate == 0) {
             addObstacleRandom();
         }
 
@@ -226,8 +227,8 @@ public class Game {
                                     player.setLane(1);
                                     TextView highscore = group.findViewById(R.id.highscoreBoard);
                                     highscore.setVisibility(View.GONE);
-                                    group.findViewById(R.id.gif).setVisibility(View.GONE);
-                                    group.findViewById(R.id.gifImageView).setVisibility(View.VISIBLE);
+                                    group.findViewById(R.id.explosion).setVisibility(View.GONE);
+                                    group.findViewById(R.id.backgroundGif).setVisibility(View.VISIBLE);
                                     group.findViewById(R.id.gameover).setVisibility(View.GONE);
                                     new Game(activity);
 
@@ -242,8 +243,8 @@ public class Game {
         for (Obstacle obstacle : lanes[player.getLane()]) {
             if (obstacle.getPosition() >= playerView.getY() - playerView.getHeight() / 2 && obstacle.getPosition() <= playerView.getY() + playerView.getHeight()) {
                 activity.runOnUiThread(() -> {
-                    group.findViewById(R.id.gif).setVisibility(View.VISIBLE);
-                    group.findViewById(R.id.gifImageView).setVisibility(View.GONE);
+                    group.findViewById(R.id.explosion).setVisibility(View.VISIBLE);
+                    group.findViewById(R.id.backgroundGif).setVisibility(View.GONE);
                 });
                 return true;
             }
@@ -286,6 +287,9 @@ public class Game {
             highScore = getPoints();
         }
 
+        if (getPoints() % 100 == 0){
+            increaseDifficulty();
+        }
 
     }
 
@@ -318,5 +322,11 @@ public class Game {
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         int defaultValue = 0;
         return sharedPref.getInt("safe", defaultValue);
+    }
+
+    public void increaseDifficulty(){
+        spawnRate += 1;
+        minSpeed += 1;
+        maxSpeed += 1;
     }
 }
