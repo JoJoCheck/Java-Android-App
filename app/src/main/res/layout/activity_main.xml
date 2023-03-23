@@ -10,7 +10,7 @@
     tools:context=".MainActivity">
 
     <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifImageView"
+        android:id="@+id/backgroundGif"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/hintergrundgif"
@@ -115,7 +115,7 @@
         app:srcCompat="@drawable/player_rennauto" />
 
     <ImageView
-        android:id="@+id/gif"
+        android:id="@+id/explosion"
         android:layout_width="wrap_content"
         android:layout_height="120dp"
         android:layout_marginBottom="120dp"
@@ -146,7 +146,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gifImageView"
+        app:layout_constraintTop_toTopOf="@+id/backgroundGif"
         app:srcCompat="@drawable/gameover"
         tools:visibility="gone" />
 

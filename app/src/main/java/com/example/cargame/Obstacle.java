@@ -9,10 +9,6 @@ public class Obstacle {
 
     private int speed;
 
-    private int minSpeed = 25;
-
-    private int maxSpeed = 57;
-
     private Random random = new Random();
 
     public Obstacle(){
@@ -43,12 +39,8 @@ public class Obstacle {
     }
 
     public void randomSpeed(){
+        int r = random.nextInt(Game.maxSpeed - Game.minSpeed);
 
-
-        int r = random.nextInt(maxSpeed - minSpeed);
-
-        setSpeed(r + minSpeed);
-
-        System.out.println(r + minSpeed);
+        setSpeed(r + Game.minSpeed);
     }
 }
