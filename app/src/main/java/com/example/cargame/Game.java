@@ -1,6 +1,8 @@
 package com.example.cargame;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -32,6 +34,7 @@ public class Game {
 
     private Player player;
 
+    private int highScore = 0;
 
     public ViewGroup group;
     public Random random = new Random();
@@ -59,6 +62,7 @@ public class Game {
         gameSpeed = 20;
         points = 0;
         gameIsRunning = true;
+        highScore = loadInt();
         //   group.removeView(group.findViewById(R.id.button));
         buttonChange();
         playerView = group.findViewById(R.id.player);
@@ -91,7 +95,7 @@ public class Game {
         addPoint();
         moveObstaclesDown();
         carCrash();
-        if (time % 70 == 0) {
+        if (time % 40 == 0) {
             addObstacleRandom();
         }
 
@@ -101,7 +105,7 @@ public class Game {
     public void moveObstaclesDown(){
         for(int j = 0; j< 3; j++) {
             for (int i = 0; i < lanes[j].size(); i++) {
-                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
+                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + lanes[j].get(i).getSpeed());
                 //Position die vorherige plus Speed setzen
                 if (lanes[j].get(i).getPosition() >= 1800) {
                     removeObstacle(j, lanes[j].get(i));
@@ -127,7 +131,7 @@ public class Game {
         activity.runOnUiThread(() -> {
             TextView number = group.findViewById(R.id.pointScore);
             setPoints(getPoints() + 1);
-            number.setText(Integer.toString(getPoints()));
+            number.setText("Score: " + Integer.toString(getPoints()));
         });
     }
 
@@ -214,6 +218,10 @@ public class Game {
             gameIsRunning = false;
             System.out.println(" -- Crash -- ");
 
+            safeInt(highScore);
+
+            System.out.println("HS: " + highScore);
+
             activity.runOnUiThread(() -> {
                         Button restart = group.findViewById(R.id.button);
                         restart.setText("Restart");
@@ -275,6 +283,10 @@ public class Game {
                 explosion.setX(thirdLane - offset);
         }
 
+        if (highScore < getPoints()){
+            highScore = getPoints();
+        }
+
 
     }
 
@@ -294,5 +306,18 @@ public class Game {
             }
         }
         updateAll();
+    }
+
+    public void safeInt(int data){
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("safe", data);
+        editor.apply();
+    }
+
+    public int loadInt(){
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        int defaultValue = 0;
+        return sharedPref.getInt("safe", defaultValue);
     }
 }
