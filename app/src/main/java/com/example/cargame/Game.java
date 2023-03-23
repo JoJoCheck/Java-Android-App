@@ -219,6 +219,11 @@ public class Game {
             System.out.println(" -- Crash -- ");
 
             safeInt(highScore);
+            activity.runOnUiThread(() -> {
+                        TextView highscoreBoard = group.findViewById(R.id.highscoreBoard);
+                        highscoreBoard.setText("Highscore:" + Integer.toString(highScore));
+                        highscoreBoard.setVisibility(View.VISIBLE);
+            });
 
             System.out.println("HS: " + highScore);
 
@@ -230,6 +235,8 @@ public class Game {
                                 v -> {
                                     removeAll();
                                     player.setLane(1);
+                                    TextView highscore = group.findViewById(R.id.highscoreBoard);
+                                    highscore.setVisibility(View.GONE);
                                     new Game(activity);
                                     group.findViewById(R.id.gif).setVisibility(View.GONE);
                                 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView gifImageView = findViewById(R.id.gif);
         Glide.with(this).asGif().load(R.drawable._a9n).into(gifImageView);
         gifImageView.setVisibility(View.GONE);
+
 
 
         startGame();
