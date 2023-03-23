@@ -223,6 +223,7 @@ public class Game {
                         TextView highscoreBoard = group.findViewById(R.id.highscoreBoard);
                         highscoreBoard.setText("Highscore:" + Integer.toString(highScore));
                         highscoreBoard.setVisibility(View.VISIBLE);
+                        group.findViewById(R.id.gameover).setVisibility(View.VISIBLE);
             });
 
             System.out.println("HS: " + highScore);
@@ -238,7 +239,10 @@ public class Game {
                                     TextView highscore = group.findViewById(R.id.highscoreBoard);
                                     highscore.setVisibility(View.GONE);
                                     group.findViewById(R.id.gif).setVisibility(View.GONE);
+                                    group.findViewById(R.id.gifImageView).setVisibility(View.VISIBLE);
+                                    group.findViewById(R.id.gameover).setVisibility(View.GONE);
                                     new Game(activity);
+
                                 }
                         );
                     }
@@ -251,6 +255,7 @@ public class Game {
             if (obstacle.getPosition() >= playerView.getY() - playerView.getHeight() / 2 && obstacle.getPosition() <= playerView.getY() + playerView.getHeight()) {
                 activity.runOnUiThread(() -> {
                     group.findViewById(R.id.gif).setVisibility(View.VISIBLE);
+                    group.findViewById(R.id.gifImageView).setVisibility(View.GONE);
                 });
                 return true;
             }

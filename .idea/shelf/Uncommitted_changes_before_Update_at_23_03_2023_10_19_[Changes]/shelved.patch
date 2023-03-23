@@ -1,0 +1,137 @@
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/cl\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"@drawable/hintergrundv2\"\r\n    tools:actionBarNavMode=\"standard\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/banner\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"150dp\"\r\n        android:layout_marginBottom=\"-40dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.505\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:srcCompat=\"@drawable/bannerv7\" />\r\n\r\n<!--    <pl.droidsonroids.gif.GifImageView-->\r\n<!--        android:layout_width=\"match_parent\"-->\r\n<!--        android:layout_height=\"match_parent\"-->\r\n<!--        android:background=\"#fff\"-->\r\n<!--        android:src=\"@drawable/giphy\" />-->\r\n\r\n    <ImageView\r\n        android:id=\"@+id/gif\"\r\n        android:layout_width=\"265dp\"\r\n        android:layout_height=\"166dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.445\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/pointScore\"\r\n        app:srcCompat=\"@drawable/_a9n\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/original_car\"\r\n        android:layout_width=\"50dp\"\r\n        android:layout_height=\"70dp\"\r\n        android:layout_marginStart=\"65dp\"\r\n        android:layout_marginTop=\"-100dp\"\r\n        android:src=\"@drawable/auto_grau\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/auto_grau\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:fontFamily=\"sans-serif-medium\"\r\n        android:text=\"Button\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageview\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintLeft_toLeftOf=\"parent\"\r\n        app:layout_constraintRight_toRightOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"1.0\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/rightbutton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginEnd=\"40dp\"\r\n        android:layout_marginBottom=\"40dp\"\r\n        android:layout_weight=\"1\"\r\n        android:text=\"right\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/leftbutton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"40dp\"\r\n        android:layout_marginBottom=\"40dp\"\r\n        android:layout_weight=\"1\"\r\n        android:text=\"left\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/pointScore\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"24dp\"\r\n        android:layout_marginEnd=\"32dp\"\r\n        android:text=\"Score: 0\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/player\"\r\n        android:layout_width=\"70dp\"\r\n        android:layout_height=\"110dp\"\r\n        android:layout_marginBottom=\"130dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:srcCompat=\"@drawable/player_rennauto\" />\r\n\r\n    <androidx.constraintlayout.widget.Group\r\n        android:id=\"@+id/test_group\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 7c41527ae3739e8957b57ce3434e3a627270c1ee)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1679563083438)
+@@ -28,12 +28,13 @@
+ 
+     <ImageView
+         android:id="@+id/gif"
+-        android:layout_width="265dp"
+-        android:layout_height="166dp"
++        android:layout_width="70dp"
++        android:layout_height="110dp"
++        android:layout_marginBottom="170dp"
++        app:layout_constraintBottom_toBottomOf="@+id/imageview"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.445"
++        app:layout_constraintHorizontal_bias="0.498"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/pointScore"
+         app:srcCompat="@drawable/_a9n" />
+ 
+     <ImageView
+@@ -68,7 +69,7 @@
+         app:layout_constraintLeft_toLeftOf="parent"
+         app:layout_constraintRight_toRightOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintVertical_bias="1.0" />
++        app:layout_constraintVertical_bias="0.0" />
+ 
+     <Button
+         android:id="@+id/rightbutton"
+Index: app/src/main/java/com/example/cargame/Game.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\nimport android.app.Activity;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.constraintlayout.widget.ConstraintLayout;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Random;\r\nimport java.util.Timer;\r\nimport java.util.TimerTask;\r\n\r\n\r\npublic class Game {\r\n    public ArrayList<Obstacle>[] lanes = new ArrayList[3];\r\n\r\n    private int gameSpeed;\r\n    private int points;\r\n\r\n    private Timer timer = new Timer();\r\n\r\n    private boolean gameIsRunning;\r\n\r\n    private int time;\r\n\r\n    private Player player;\r\n\r\n    public ViewGroup group;\r\n    public Random random = new Random();\r\n\r\n    private Activity activity;\r\n\r\n    private ImageView original;\r\n    private ImageView playerView;\r\n    private ViewGroup.LayoutParams layout;\r\n\r\n    private int firstLane = 180;\r\n    private int secondLane = firstLane + 300;\r\n    private int thirdLane = secondLane + 300;\r\n\r\n\r\n    public Game(Activity activity) {\r\n\r\n        lanes[0] = new ArrayList<>();\r\n        lanes[1] = new ArrayList<>();\r\n        lanes[2] = new ArrayList<>();\r\n        this.group = activity.findViewById(R.id.cl);\r\n        this.activity = activity;\r\n        time = 0;\r\n        gameSpeed = 20;\r\n        points = 0;\r\n        gameIsRunning = true;\r\n        //   group.removeView(group.findViewById(R.id.button));\r\n        buttonChange();\r\n        playerView = group.findViewById(R.id.player);\r\n        player = new Player();\r\n        original = group.findViewById(R.id.original_car);\r\n        layout = original.getLayoutParams();\r\n        movePlayerLeft();\r\n        movePlayerRight();\r\n        timer.schedule(new TimerTask() {\r\n            @Override\r\n            public void run() {\r\n                while (gameIsRunning) {\r\n                    try {\r\n                        //System.out.println(Thread.getAllStackTraces().keySet().toString());\r\n                        Thread.sleep(1000/30);\r\n                        loop();\r\n                    } catch (InterruptedException e) {\r\n                        throw new RuntimeException(e);\r\n                    }\r\n                }\r\n            }\r\n        }, 100);\r\n    }\r\n\r\n    public void loop() {\r\n\r\n        time++;\r\n\r\n        addPoint();\r\n        moveObstaclesDown();\r\n        carCrash();\r\n        if (time % 70 == 0) {\r\n            addObstacleRandom();\r\n        }\r\n\r\n        updateAll();\r\n\r\n    }\r\n    public void moveObstaclesDown(){\r\n        for(int j = 0; j< 3; j++) {\r\n            for (int i = 0; i < lanes[j].size(); i++) {\r\n                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);\r\n                //Position die vorherige plus Speed setzen\r\n                if (lanes[j].get(i).getPosition() == 2400) {\r\n                    removeObstacle(j, lanes[j].get(i));\r\n                    //Objekte wenn sie am Rand sind entfernen\r\n                }\r\n            }\r\n        }\r\n    }\r\n    public void movePlayerRight(){\r\n        Button moveRightButton = group.findViewById(R.id.rightbutton);\r\n        moveRightButton.setOnClickListener(v -> {\r\n            player.moveRight();\r\n        });\r\n    }\r\n    public void movePlayerLeft(){\r\n        Button moveLeftButton = group.findViewById(R.id.leftbutton);\r\n        moveLeftButton.setOnClickListener(v -> {\r\n            player.moveLeft();\r\n        });\r\n    }\r\n\r\n    public void addPoint() {\r\n        activity.runOnUiThread(() -> {\r\n            TextView number = group.findViewById(R.id.pointScore);\r\n            setPoints(getPoints() + 1);\r\n            number.setText(Integer.toString(getPoints()));\r\n        });\r\n    }\r\n\r\n    public void addObstacleRandom() {\r\n        addObstacle(random.nextInt(3));\r\n        System.out.println(\"new\");\r\n    }\r\n\r\n    public void addObstacle(int lane) {\r\n        if (lane < 0 || lane > 2) {\r\n            throw new RuntimeException(\"nicht vorhandene Lane\");\r\n        }\r\n        int id = View.generateViewId();\r\n        Obstacle obst = new Obstacle();\r\n        obst.setId(id);\r\n        lanes[lane].add(obst);\r\n\r\n        activity.runOnUiThread(() -> {\r\n            ImageView view = new ImageView(group.getContext());\r\n            switch (random.nextInt(4)) {\r\n                case 0:\r\n                    view.setImageResource(R.drawable.auto_blau_final);\r\n                    break;\r\n                case 1:\r\n                    view.setImageResource(R.drawable.auto_gr_n);\r\n                    break;\r\n                case 2:\r\n                    view.setImageResource(R.drawable.auto_rot_final);\r\n                    break;\r\n                case 3:\r\n                    view.setImageResource(R.drawable.auto_grau);\r\n                    break;\r\n            }\r\n            view.setId(id);\r\n            view.setLayoutParams(new ViewGroup.LayoutParams(this.layout));\r\n            group.addView(view);\r\n            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) view.getLayoutParams();\r\n            params.leftToLeft = group.getId();\r\n            params.topToTop = original.getId();\r\n            switch (lane) {\r\n                case 0:\r\n                    params.leftMargin = firstLane;\r\n                    break;\r\n                case 1:\r\n                    params.leftMargin = secondLane;\r\n                    break;\r\n                case 2:\r\n                    params.leftMargin = thirdLane;\r\n                    break;\r\n            }\r\n            view.requestLayout();\r\n        });\r\n\r\n    }\r\n\r\n    public void removeObstacle(int lane, Obstacle obst) {\r\n        lanes[lane].remove(obst);\r\n        group.findViewById(obst.getId()).setVisibility(View.GONE);\r\n        activity.runOnUiThread(() -> {\r\n            group.removeView(group.findViewById(obst.getId()));\r\n        });\r\n\r\n        System.out.println(\"removed\");\r\n    }\r\n\r\n    public int getGameSpeed() {\r\n        return gameSpeed;\r\n    }\r\n\r\n    public void setGameSpeed(int gameSpeed) {\r\n        this.gameSpeed = gameSpeed;\r\n    }\r\n\r\n    public int getPoints() {\r\n        return points;\r\n    }\r\n\r\n    public void setPoints(int points) {\r\n        this.points = points;\r\n    }\r\n\r\n    public void carCrash() {\r\n        if (collision()) {\r\n            gameIsRunning = false;\r\n            System.out.println(\" -- Crash -- \");\r\n\r\n            activity.runOnUiThread(() -> {\r\n                        Button restart = group.findViewById(R.id.button);\r\n                        restart.setText(\"Restart\");\r\n                        restart.setVisibility(View.VISIBLE);\r\n                        restart.setOnClickListener(\r\n                                v -> {\r\n                                    removeAll();\r\n                                    player.setLane(1);\r\n                                    new Game(activity);\r\n                                }\r\n                        );\r\n                    }\r\n            );\r\n        }\r\n    }\r\n\r\n    public boolean collision() {\r\n        for (Obstacle obstacle : lanes[player.getLane()]) {\r\n            if (obstacle.getPosition() >= playerView.getY()-(int)(playerView.getHeight()/2) && obstacle.getPosition() <= playerView.getY()+playerView.getHeight()) {\r\n                return true;\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n\r\n    public View findViewOfObstacle(Obstacle obst) {\r\n        return group.findViewById(obst.getId());\r\n    }\r\n\r\n    public void updateAll() {\r\n\r\n        for (int i = 0; i < lanes.length; i++) {\r\n            for (int j = 0; j < lanes[i].size(); j++) {\r\n                Obstacle o = lanes[i].get(j);\r\n                if (findViewOfObstacle(o) == null) continue;\r\n                findViewOfObstacle(o).setY(o.getPosition());\r\n                findViewOfObstacle(o).setVisibility(View.VISIBLE);\r\n            }\r\n        }\r\n\r\n        int offset = 32;\r\n        switch (player.getLane()) {\r\n            case 0:\r\n                playerView.setX(firstLane - offset);\r\n                break;\r\n            case 1:\r\n                playerView.setX(secondLane - offset);\r\n                break;\r\n            case 2:\r\n                playerView.setX(thirdLane - offset);\r\n        }\r\n\r\n\r\n    }\r\n\r\n    public void buttonChange() {\r\n        Button startGameButton = group.findViewById(R.id.button);\r\n        Button leftButton = group.findViewById(R.id.leftbutton);\r\n        Button rightButton = group.findViewById(R.id.rightbutton);\r\n        startGameButton.setVisibility(View.GONE);\r\n        leftButton.setVisibility(View.VISIBLE);\r\n        rightButton.setVisibility(View.VISIBLE);\r\n    }\r\n\r\n    public void removeAll(){\r\n        for(int i = 0; i < lanes.length; i++){\r\n            for(int j = 0; j < lanes[i].size(); j++){\r\n                removeObstacle(i,lanes[i].get(j));\r\n            }\r\n        }\r\n        updateAll();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/Game.java b/app/src/main/java/com/example/cargame/Game.java
+--- a/app/src/main/java/com/example/cargame/Game.java	(revision 7c41527ae3739e8957b57ce3434e3a627270c1ee)
++++ b/app/src/main/java/com/example/cargame/Game.java	(date 1679562913899)
+@@ -10,6 +10,8 @@
+ 
+ import androidx.constraintlayout.widget.ConstraintLayout;
+ 
++import com.bumptech.glide.Glide;
++
+ import java.util.ArrayList;
+ import java.util.Random;
+ import java.util.Timer;
+@@ -30,6 +32,7 @@
+ 
+     private Player player;
+ 
++
+     public ViewGroup group;
+     public Random random = new Random();
+ 
+@@ -37,6 +40,7 @@
+ 
+     private ImageView original;
+     private ImageView playerView;
++    private ImageView explosion;
+     private ViewGroup.LayoutParams layout;
+ 
+     private int firstLane = 180;
+@@ -228,12 +232,14 @@
+     public boolean collision() {
+         for (Obstacle obstacle : lanes[player.getLane()]) {
+             if (obstacle.getPosition() >= playerView.getY()-(int)(playerView.getHeight()/2) && obstacle.getPosition() <= playerView.getY()+playerView.getHeight()) {
++                group.findViewById(R.id.gif).setVisibility(View.VISIBLE);
+                 return true;
+             }
+         }
+         return false;
+     }
+ 
++
+     public View findViewOfObstacle(Obstacle obst) {
+         return group.findViewById(obst.getId());
+     }
+@@ -253,12 +259,16 @@
+         switch (player.getLane()) {
+             case 0:
+                 playerView.setX(firstLane - offset);
++                explosion.setX(firstLane - offset);
++
+                 break;
+             case 1:
+                 playerView.setX(secondLane - offset);
++                explosion.setX(secondLane - offset);
+                 break;
+             case 2:
+                 playerView.setX(thirdLane - offset);
++                explosion.setX(thirdLane - offset);
+         }
+ 
+ 
+Index: app/src/main/java/com/example/cargame/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\nimport android.webkit.WebView;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\n\r\nimport com.bumptech.glide.Glide;\r\n\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n    WebView webView;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n        ImageView gifImageView = findViewById(R.id.gif);\r\n        Glide.with(this).asGif().load(R.drawable._a9n).into(gifImageView);\r\n\r\n\r\n        startGame();\r\n    }\r\n\r\n    protected void startGame(){\r\n        Button startGameButton = findViewById(R.id.button);\r\n        startGameButton.setOnClickListener(v -> {\r\n            new Game(this);\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/MainActivity.java b/app/src/main/java/com/example/cargame/MainActivity.java
+--- a/app/src/main/java/com/example/cargame/MainActivity.java	(revision 7c41527ae3739e8957b57ce3434e3a627270c1ee)
++++ b/app/src/main/java/com/example/cargame/MainActivity.java	(date 1679562235468)
+@@ -3,6 +3,7 @@
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+ import android.os.Bundle;
++import android.view.View;
+ import android.webkit.WebView;
+ import android.widget.Button;
+ import android.widget.ImageView;
+@@ -11,13 +12,13 @@
+ 
+ 
+ public class MainActivity extends AppCompatActivity {
+-    WebView webView;
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+         ImageView gifImageView = findViewById(R.id.gif);
+         Glide.with(this).asGif().load(R.drawable._a9n).into(gifImageView);
++        gifImageView.setVisibility(View.GONE);
+ 
+ 
+         startGame();
