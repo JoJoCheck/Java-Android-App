@@ -333,11 +333,16 @@ public class Game {
     }
 
     public void increaseDifficulty(){
-        spawnRateDecrease = 3;
-        if(spawnRate - spawnRateDecrease <= 0){
+        spawnRateDecrease = 4;
+        if(spawnRate - spawnRateDecrease > 26){
             spawnRate -= spawnRateDecrease;
         }
-        minSpeed += 1;
-        maxSpeed += 1;
+        if (minSpeed < 50){
+            minSpeed += 1;
+        }
+
+        if (maxSpeed < 80){
+            maxSpeed += 2;
+        }
     }
 }
