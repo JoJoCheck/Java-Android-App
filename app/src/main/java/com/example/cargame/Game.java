@@ -127,7 +127,7 @@ public class Game {
         activity.runOnUiThread(() -> {
             TextView number = group.findViewById(R.id.pointScore);
             setPoints(getPoints() + 1);
-            number.setText(Integer.toString(getPoints()));
+            number.setText("Score: " + Integer.toString(getPoints()));
         });
     }
 
