@@ -20,6 +20,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bannerv7" />
 
+<!--    <pl.droidsonroids.gif.GifImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#fff"-->
+<!--        android:src="@drawable/giphy" />-->
+
+    <ImageView
+        android:id="@+id/gif"
+        android:layout_width="265dp"
+        android:layout_height="166dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.445"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pointScore"
+        app:srcCompat="@drawable/giphy" />
+
     <ImageView
         android:id="@+id/original_car"
         android:layout_width="50dp"
@@ -41,6 +57,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/rightbutton"
