@@ -22,10 +22,14 @@ import java.util.TimerTask;
 public class Game {
     public ArrayList<Obstacle>[] lanes = new ArrayList[3];
     private int points;
+    private int defaultSpawnRate = 70;
     private int spawnRate;
-    public static int minSpeed = 25;
+    private int spawnRateDecrease;
+    private static int defaultMinSpeed = 15;
+    public static int minSpeed;
 
-    public static int maxSpeed = 57;
+    private static int defaultMaxSpeed = 45;
+    public static int maxSpeed;
 
     private Timer timer = new Timer();
 
@@ -61,8 +65,10 @@ public class Game {
         this.activity = activity;
         time = 0;
         points = 0;
-        spawnRate = 40;
+        spawnRate = defaultSpawnRate;
         gameIsRunning = true;
+        minSpeed = defaultMinSpeed;
+        maxSpeed = defaultMaxSpeed;
         highScore = loadInt();
         //   group.removeView(group.findViewById(R.id.button));
         buttonChange();
@@ -230,8 +236,10 @@ public class Game {
                                     group.findViewById(R.id.explosion).setVisibility(View.GONE);
                                     group.findViewById(R.id.backgroundGif).setVisibility(View.VISIBLE);
                                     group.findViewById(R.id.gameover).setVisibility(View.GONE);
+                                    minSpeed = defaultMinSpeed;
+                                    maxSpeed = defaultMaxSpeed;
+                                    spawnRate = defaultSpawnRate;
                                     new Game(activity);
-
                                 }
                         );
                     }
@@ -325,7 +333,10 @@ public class Game {
     }
 
     public void increaseDifficulty(){
-        spawnRate += 1;
+        spawnRateDecrease = 3;
+        if(spawnRate - spawnRateDecrease <= 0){
+            spawnRate -= spawnRateDecrease;
+        }
         minSpeed += 1;
         maxSpeed += 1;
     }
