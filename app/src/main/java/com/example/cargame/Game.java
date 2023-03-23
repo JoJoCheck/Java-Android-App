@@ -67,6 +67,7 @@ public class Game {
         buttonChange();
         playerView = group.findViewById(R.id.player);
         explosion = group.findViewById(R.id.gif);
+        Glide.with(activity).asGif().load(R.drawable._a9n).into(explosion);
         player = new Player();
         original = group.findViewById(R.id.original_car);
         layout = original.getLayoutParams();
@@ -78,7 +79,7 @@ public class Game {
                 while (gameIsRunning) {
                     try {
                         //System.out.println(Thread.getAllStackTraces().keySet().toString());
-                        Thread.sleep(1000/30);
+                        Thread.sleep(1000 / 30);
                         loop();
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
@@ -89,7 +90,7 @@ public class Game {
     }
 
     public void loop() {
-
+        updateAll();
         time++;
 
         addPoint();
@@ -99,7 +100,6 @@ public class Game {
             addObstacleRandom();
         }
 
-        updateAll();
 
     }
     public void moveObstaclesDown(){
@@ -237,8 +237,8 @@ public class Game {
                                     player.setLane(1);
                                     TextView highscore = group.findViewById(R.id.highscoreBoard);
                                     highscore.setVisibility(View.GONE);
-                                    new Game(activity);
                                     group.findViewById(R.id.gif).setVisibility(View.GONE);
+                                    new Game(activity);
                                 }
                         );
                     }
@@ -248,7 +248,7 @@ public class Game {
 
     public boolean collision() {
         for (Obstacle obstacle : lanes[player.getLane()]) {
-            if (obstacle.getPosition() >= playerView.getY()- playerView.getHeight()/2 && obstacle.getPosition() <= playerView.getY()+playerView.getHeight()) {
+            if (obstacle.getPosition() >= playerView.getY() - playerView.getHeight() / 2 && obstacle.getPosition() <= playerView.getY() + playerView.getHeight()) {
                 activity.runOnUiThread(() -> {
                     group.findViewById(R.id.gif).setVisibility(View.VISIBLE);
                 });
@@ -279,7 +279,6 @@ public class Game {
             case 0:
                 playerView.setX(firstLane - offset);
                 explosion.setX(firstLane - offset);
-
                 break;
             case 1:
                 playerView.setX(secondLane - offset);

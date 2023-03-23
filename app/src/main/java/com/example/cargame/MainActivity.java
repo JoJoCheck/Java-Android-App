@@ -1,10 +1,10 @@
 package com.example.cargame;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,10 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ImageView gifImageView = findViewById(R.id.gif);
-        Glide.with(this).asGif().load(R.drawable._a9n).into(gifImageView);
-        gifImageView.setVisibility(View.GONE);
-
 
 
         startGame();
