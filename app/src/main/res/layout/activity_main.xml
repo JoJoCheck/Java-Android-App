@@ -20,14 +20,15 @@
         android:id="@+id/highscoreBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="404dp"
+        android:layout_marginTop="272dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="casual"
         android:text="Highscore"
         android:textColor="@color/purple_200"
-        android:textSize="48sp"
+        android:textSize="35sp"
         android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageview" />
 
@@ -143,6 +144,7 @@
         android:layout_height="214dp"
         android:layout_marginTop="112dp"
         android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/highscoreBoard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -155,9 +157,11 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginTop="100dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fa8_logo" />
+        app:srcCompat="@drawable/fa8_logo"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
