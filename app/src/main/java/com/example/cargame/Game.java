@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
@@ -30,6 +32,7 @@ public class Game {
 
     private Player player;
 
+
     public ViewGroup group;
     public Random random = new Random();
 
@@ -37,6 +40,7 @@ public class Game {
 
     private ImageView original;
     private ImageView playerView;
+    private ImageView explosion;
     private ViewGroup.LayoutParams layout;
 
     private int firstLane = 180;
@@ -58,6 +62,7 @@ public class Game {
         //   group.removeView(group.findViewById(R.id.button));
         buttonChange();
         playerView = group.findViewById(R.id.player);
+        explosion = group.findViewById(R.id.gif);
         player = new Player();
         original = group.findViewById(R.id.original_car);
         layout = original.getLayoutParams();
@@ -86,7 +91,7 @@ public class Game {
         addPoint();
         moveObstaclesDown();
         carCrash();
-        if (time % 70 == 0) {
+        if (time % 40 == 0) {
             addObstacleRandom();
         }
 
@@ -96,7 +101,7 @@ public class Game {
     public void moveObstaclesDown(){
         for(int j = 0; j< 3; j++) {
             for (int i = 0; i < lanes[j].size(); i++) {
-                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
+                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + lanes[j].get(i).getSpeed());
                 //Position die vorherige plus Speed setzen
                 if (lanes[j].get(i).getPosition() >= 1800) {
                     removeObstacle(j, lanes[j].get(i));
@@ -218,6 +223,7 @@ public class Game {
                                     removeAll();
                                     player.setLane(1);
                                     new Game(activity);
+                                    group.findViewById(R.id.gif).setVisibility(View.GONE);
                                 }
                         );
                     }
@@ -227,12 +233,16 @@ public class Game {
 
     public boolean collision() {
         for (Obstacle obstacle : lanes[player.getLane()]) {
-            if (obstacle.getPosition() >= playerView.getY()-(int)(playerView.getHeight()/2) && obstacle.getPosition() <= playerView.getY()+playerView.getHeight()) {
+            if (obstacle.getPosition() >= playerView.getY()- playerView.getHeight()/2 && obstacle.getPosition() <= playerView.getY()+playerView.getHeight()) {
+                activity.runOnUiThread(() -> {
+                    group.findViewById(R.id.gif).setVisibility(View.VISIBLE);
+                });
                 return true;
             }
         }
         return false;
     }
+
 
     public View findViewOfObstacle(Obstacle obst) {
         return group.findViewById(obst.getId());
@@ -253,12 +263,16 @@ public class Game {
         switch (player.getLane()) {
             case 0:
                 playerView.setX(firstLane - offset);
+                explosion.setX(firstLane - offset);
+
                 break;
             case 1:
                 playerView.setX(secondLane - offset);
+                explosion.setX(secondLane - offset);
                 break;
             case 2:
                 playerView.setX(thirdLane - offset);
+                explosion.setX(thirdLane - offset);
         }
 
 
