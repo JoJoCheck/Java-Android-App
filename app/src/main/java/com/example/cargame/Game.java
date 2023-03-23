@@ -180,8 +180,8 @@ public class Game {
 
     public void removeObstacle(int lane, Obstacle obst) {
         lanes[lane].remove(obst);
-        group.findViewById(obst.getId()).setVisibility(View.GONE);
         activity.runOnUiThread(() -> {
+            group.findViewById(obst.getId()).setVisibility(View.GONE);
             group.removeView(group.findViewById(obst.getId()));
         });
 
