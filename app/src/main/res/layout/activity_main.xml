@@ -9,11 +9,12 @@
     tools:actionBarNavMode="standard"
     tools:context=".MainActivity">
 
-    <!--    <pl.droidsonroids.gif.GifImageView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:background="#fff"-->
-<!--        android:src="@drawable/giphy" />-->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/hintergrundgif"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/original_car"
