@@ -24,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
     protected void startGame(){
         Button startGameButton = findViewById(R.id.button);
+        ImageView logo = findViewById(R.id.appLogo);
         startGameButton.setOnClickListener(v -> {
+            logo.setVisibility(View.GONE);
             new Game(this);
         });
     }

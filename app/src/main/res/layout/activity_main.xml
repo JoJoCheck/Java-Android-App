@@ -150,4 +150,15 @@
         app:srcCompat="@drawable/gameover"
         tools:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/appLogo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/gifImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fa8_logo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
