@@ -17,10 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ImageView gifImageView = findViewById(R.id.gif);
-        Glide.with(this).asGif().load(R.drawable._a9n).into(gifImageView);
-        gifImageView.setVisibility(View.GONE);
-
 
 
         startGame();

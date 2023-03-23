@@ -114,12 +114,13 @@
 
     <ImageView
         android:id="@+id/gif"
-        android:layout_width="84dp"
+        android:layout_width="wrap_content"
         android:layout_height="120dp"
         android:layout_marginBottom="120dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageview"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/_a9n" />
 
