@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
@@ -30,6 +32,7 @@ public class Game {
 
     private Player player;
 
+
     public ViewGroup group;
     public Random random = new Random();
 
@@ -37,6 +40,7 @@ public class Game {
 
     private ImageView original;
     private ImageView playerView;
+    private ImageView explosion;
     private ViewGroup.LayoutParams layout;
 
     private int firstLane = 180;
@@ -58,6 +62,7 @@ public class Game {
         //   group.removeView(group.findViewById(R.id.button));
         buttonChange();
         playerView = group.findViewById(R.id.player);
+        explosion = group.findViewById(R.id.gif);
         player = new Player();
         original = group.findViewById(R.id.original_car);
         layout = original.getLayoutParams();
@@ -227,12 +232,16 @@ public class Game {
 
     public boolean collision() {
         for (Obstacle obstacle : lanes[player.getLane()]) {
-            if (obstacle.getPosition() >= playerView.getY()-(int)(playerView.getHeight()/2) && obstacle.getPosition() <= playerView.getY()+playerView.getHeight()) {
+            if (obstacle.getPosition() >= playerView.getY()- playerView.getHeight()/2 && obstacle.getPosition() <= playerView.getY()+playerView.getHeight()) {
+                activity.runOnUiThread(() -> {
+                    group.findViewById(R.id.gif).setVisibility(View.VISIBLE);
+                });
                 return true;
             }
         }
         return false;
     }
+
 
     public View findViewOfObstacle(Obstacle obst) {
         return group.findViewById(obst.getId());
@@ -253,12 +262,16 @@ public class Game {
         switch (player.getLane()) {
             case 0:
                 playerView.setX(firstLane - offset);
+                explosion.setX(firstLane - offset);
+
                 break;
             case 1:
                 playerView.setX(secondLane - offset);
+                explosion.setX(secondLane - offset);
                 break;
             case 2:
                 playerView.setX(thirdLane - offset);
+                explosion.setX(thirdLane - offset);
         }
 
 
