@@ -1,6 +1,8 @@
 package com.example.cargame;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -32,6 +34,7 @@ public class Game {
 
     private Player player;
 
+    private int highScore = 0;
 
     public ViewGroup group;
     public Random random = new Random();
@@ -59,6 +62,7 @@ public class Game {
         gameSpeed = 20;
         points = 0;
         gameIsRunning = true;
+        highScore = loadInt();
         //   group.removeView(group.findViewById(R.id.button));
         buttonChange();
         playerView = group.findViewById(R.id.player);
@@ -214,6 +218,10 @@ public class Game {
             gameIsRunning = false;
             System.out.println(" -- Crash -- ");
 
+            safeInt(highScore);
+
+            System.out.println("HS: " + highScore);
+
             activity.runOnUiThread(() -> {
                         Button restart = group.findViewById(R.id.button);
                         restart.setText("Restart");
@@ -275,6 +283,10 @@ public class Game {
                 explosion.setX(thirdLane - offset);
         }
 
+        if (highScore < getPoints()){
+            highScore = getPoints();
+        }
+
 
     }
 
@@ -294,5 +306,18 @@ public class Game {
             }
         }
         updateAll();
+    }
+
+    public void safeInt(int data){
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("safe", data);
+        editor.apply();
+    }
+
+    public int loadInt(){
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        int defaultValue = 0;
+        return sharedPref.getInt("safe", defaultValue);
     }
 }
