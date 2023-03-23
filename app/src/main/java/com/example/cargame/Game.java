@@ -17,8 +17,6 @@ import java.util.TimerTask;
 
 
 public class Game {
-
-    private int JonaCounter;
     public ArrayList<Obstacle>[] lanes = new ArrayList[3];
 
     private int gameSpeed;
@@ -51,8 +49,8 @@ public class Game {
         lanes[0] = new ArrayList<>();
         lanes[1] = new ArrayList<>();
         lanes[2] = new ArrayList<>();
+        this.group = activity.findViewById(R.id.cl);
         this.activity = activity;
-        this.group = this.activity.findViewById(R.id.cl);
         time = 0;
         gameSpeed = 20;
         points = 0;
@@ -65,12 +63,20 @@ public class Game {
         layout = original.getLayoutParams();
         movePlayerLeft();
         movePlayerRight();
-        timer.scheduleAtFixedRate(new TimerTask() {
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (gameIsRunning) loop();
+                while (gameIsRunning) {
+                    try {
+                        //System.out.println(Thread.getAllStackTraces().keySet().toString());
+                        Thread.sleep(1000/30);
+                        loop();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
-        }, 0, 1000 / 30);
+        }, 100);
     }
 
     public void loop() {
@@ -80,7 +86,7 @@ public class Game {
         addPoint();
         moveObstaclesDown();
         carCrash();
-        if (time % 100 == 0) {
+        if (time % 70 == 0) {
             addObstacleRandom();
         }
 
@@ -103,16 +109,12 @@ public class Game {
         Button moveRightButton = group.findViewById(R.id.rightbutton);
         moveRightButton.setOnClickListener(v -> {
             player.moveRight();
-            System.out.println(playerView.getHeight());
-            System.out.println(playerView.getY());
         });
     }
     public void movePlayerLeft(){
         Button moveLeftButton = group.findViewById(R.id.leftbutton);
         moveLeftButton.setOnClickListener(v -> {
             player.moveLeft();
-            System.out.println(playerView.getHeight());
-            System.out.println(playerView.getY());
         });
     }
 
@@ -127,8 +129,6 @@ public class Game {
     public void addObstacleRandom() {
         addObstacle(random.nextInt(3));
         System.out.println("new");
-        JonaCounter++;
-        System.out.println(JonaCounter);
     }
 
     public void addObstacle(int lane) {
@@ -180,6 +180,7 @@ public class Game {
 
     public void removeObstacle(int lane, Obstacle obst) {
         lanes[lane].remove(obst);
+        group.findViewById(obst.getId()).setVisibility(View.GONE);
         activity.runOnUiThread(() -> {
             group.removeView(group.findViewById(obst.getId()));
         });
@@ -207,13 +208,20 @@ public class Game {
         if (collision()) {
             gameIsRunning = false;
             System.out.println(" -- Crash -- ");
+
             activity.runOnUiThread(() -> {
                         Button restart = group.findViewById(R.id.button);
                         restart.setText("Restart");
                         restart.setVisibility(View.VISIBLE);
+                        restart.setOnClickListener(
+                                v -> {
+                                    removeAll();
+                                    player.setLane(1);
+                                    new Game(activity);
+                                }
+                        );
                     }
             );
-            //new Game(activity);
         }
     }
 
@@ -237,6 +245,7 @@ public class Game {
                 Obstacle o = lanes[i].get(j);
                 if (findViewOfObstacle(o) == null) continue;
                 findViewOfObstacle(o).setY(o.getPosition());
+                findViewOfObstacle(o).setVisibility(View.VISIBLE);
             }
         }
 
@@ -262,5 +271,14 @@ public class Game {
         startGameButton.setVisibility(View.GONE);
         leftButton.setVisibility(View.VISIBLE);
         rightButton.setVisibility(View.VISIBLE);
+    }
+
+    public void removeAll(){
+        for(int i = 0; i < lanes.length; i++){
+            for(int j = 0; j < lanes[i].size(); j++){
+                removeObstacle(i,lanes[i].get(j));
+            }
+        }
+        updateAll();
     }
 }
