@@ -1,0 +1,113 @@
+Index: app/src/main/java/com/example/cargame/Obstacle.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\npublic class Obstacle {\r\n    private int position;\r\n\r\n    private int id;\r\n\r\n    public Obstacle(){\r\n        setPosition(-200); //fester Wert ganz oben am Bildschrim\r\n    }\r\n    public void setPosition(int position) {\r\n        this.position = position;\r\n    }\r\n    public int getPosition() {\r\n        return position;\r\n    }\r\n\r\n    public void setId(int id){\r\n        this.id = id;\r\n    }\r\n\r\n    public int getId(){\r\n        return id;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/Obstacle.java b/app/src/main/java/com/example/cargame/Obstacle.java
+--- a/app/src/main/java/com/example/cargame/Obstacle.java	(revision f4351259feb608aee751a4d2f4db4d8116ea26db)
++++ b/app/src/main/java/com/example/cargame/Obstacle.java	(date 1679564541367)
+@@ -1,12 +1,23 @@
+ package com.example.cargame;
+ 
++import java.util.Random;
++
+ public class Obstacle {
+     private int position;
+ 
+     private int id;
+ 
++    private int speed;
++
++    private int minSpeed = 25;
++
++    private int maxSpeed = 57;
++
++    private Random random = new Random();
++
+     public Obstacle(){
+         setPosition(-200); //fester Wert ganz oben am Bildschrim
++        randomSpeed();
+     }
+     public void setPosition(int position) {
+         this.position = position;
+@@ -22,4 +33,22 @@
+     public int getId(){
+         return id;
+     }
++
++    public int getSpeed(){
++        return speed;
++    }
++
++    public void setSpeed(int speed){
++        this.speed = speed;
++    }
++
++    public void randomSpeed(){
++
++
++        int r = random.nextInt(maxSpeed - minSpeed);
++
++        setSpeed(r + minSpeed);
++
++        System.out.println(r + minSpeed);
++    }
+ }
+Index: app/src/main/java/com/example/cargame/Game.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cargame;\r\n\r\nimport android.app.Activity;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.constraintlayout.widget.ConstraintLayout;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Random;\r\nimport java.util.Timer;\r\nimport java.util.TimerTask;\r\n\r\n\r\npublic class Game {\r\n    public ArrayList<Obstacle>[] lanes = new ArrayList[3];\r\n\r\n    private int gameSpeed;\r\n    private int points;\r\n\r\n    private Timer timer = new Timer();\r\n\r\n    private boolean gameIsRunning;\r\n\r\n    private int time;\r\n\r\n    private Player player;\r\n\r\n    public ViewGroup group;\r\n    public Random random = new Random();\r\n\r\n    private Activity activity;\r\n\r\n    private ImageView original;\r\n    private ImageView playerView;\r\n    private ViewGroup.LayoutParams layout;\r\n\r\n    private int firstLane = 180;\r\n    private int secondLane = firstLane + 300;\r\n    private int thirdLane = secondLane + 300;\r\n\r\n\r\n    public Game(Activity activity) {\r\n\r\n        lanes[0] = new ArrayList<>();\r\n        lanes[1] = new ArrayList<>();\r\n        lanes[2] = new ArrayList<>();\r\n        this.group = activity.findViewById(R.id.cl);\r\n        this.activity = activity;\r\n        time = 0;\r\n        gameSpeed = 20;\r\n        points = 0;\r\n        gameIsRunning = true;\r\n        //   group.removeView(group.findViewById(R.id.button));\r\n        buttonChange();\r\n        playerView = group.findViewById(R.id.player);\r\n        player = new Player();\r\n        original = group.findViewById(R.id.original_car);\r\n        layout = original.getLayoutParams();\r\n        movePlayerLeft();\r\n        movePlayerRight();\r\n        timer.schedule(new TimerTask() {\r\n            @Override\r\n            public void run() {\r\n                while (gameIsRunning) {\r\n                    try {\r\n                        //System.out.println(Thread.getAllStackTraces().keySet().toString());\r\n                        Thread.sleep(1000/30);\r\n                        loop();\r\n                    } catch (InterruptedException e) {\r\n                        throw new RuntimeException(e);\r\n                    }\r\n                }\r\n            }\r\n        }, 100);\r\n    }\r\n\r\n    public void loop() {\r\n\r\n        time++;\r\n\r\n        addPoint();\r\n        moveObstaclesDown();\r\n        carCrash();\r\n        if (time % 70 == 0) {\r\n            addObstacleRandom();\r\n        }\r\n\r\n        updateAll();\r\n\r\n    }\r\n    public void moveObstaclesDown(){\r\n        for(int j = 0; j< 3; j++) {\r\n            for (int i = 0; i < lanes[j].size(); i++) {\r\n                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);\r\n                //Position die vorherige plus Speed setzen\r\n                if (lanes[j].get(i).getPosition() >= 1800) {\r\n                    removeObstacle(j, lanes[j].get(i));\r\n                    //Objekte wenn sie am Rand sind entfernen\r\n                }\r\n            }\r\n        }\r\n    }\r\n    public void movePlayerRight(){\r\n        Button moveRightButton = group.findViewById(R.id.rightbutton);\r\n        moveRightButton.setOnClickListener(v -> {\r\n            player.moveRight();\r\n        });\r\n    }\r\n    public void movePlayerLeft(){\r\n        Button moveLeftButton = group.findViewById(R.id.leftbutton);\r\n        moveLeftButton.setOnClickListener(v -> {\r\n            player.moveLeft();\r\n        });\r\n    }\r\n\r\n    public void addPoint() {\r\n        activity.runOnUiThread(() -> {\r\n            TextView number = group.findViewById(R.id.pointScore);\r\n            setPoints(getPoints() + 1);\r\n            number.setText(Integer.toString(getPoints()));\r\n        });\r\n    }\r\n\r\n    public void addObstacleRandom() {\r\n        addObstacle(random.nextInt(3));\r\n        System.out.println(\"new\");\r\n    }\r\n\r\n    public void addObstacle(int lane) {\r\n        if (lane < 0 || lane > 2) {\r\n            throw new RuntimeException(\"nicht vorhandene Lane\");\r\n        }\r\n        int id = View.generateViewId();\r\n        Obstacle obst = new Obstacle();\r\n        obst.setId(id);\r\n        lanes[lane].add(obst);\r\n\r\n        activity.runOnUiThread(() -> {\r\n            ImageView view = new ImageView(group.getContext());\r\n            switch (random.nextInt(4)) {\r\n                case 0:\r\n                    view.setImageResource(R.drawable.auto_blau_final);\r\n                    break;\r\n                case 1:\r\n                    view.setImageResource(R.drawable.auto_gr_n);\r\n                    break;\r\n                case 2:\r\n                    view.setImageResource(R.drawable.auto_rot_final);\r\n                    break;\r\n                case 3:\r\n                    view.setImageResource(R.drawable.auto_grau);\r\n                    break;\r\n            }\r\n            view.setId(id);\r\n            view.setLayoutParams(new ViewGroup.LayoutParams(this.layout));\r\n            group.addView(view);\r\n            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) view.getLayoutParams();\r\n            params.leftToLeft = group.getId();\r\n            params.topToTop = original.getId();\r\n            switch (lane) {\r\n                case 0:\r\n                    params.leftMargin = firstLane;\r\n                    break;\r\n                case 1:\r\n                    params.leftMargin = secondLane;\r\n                    break;\r\n                case 2:\r\n                    params.leftMargin = thirdLane;\r\n                    break;\r\n            }\r\n            view.requestLayout();\r\n        });\r\n\r\n    }\r\n\r\n    public void removeObstacle(int lane, Obstacle obst) {\r\n        lanes[lane].remove(obst);\r\n        activity.runOnUiThread(() -> {\r\n            group.findViewById(obst.getId()).setVisibility(View.GONE);\r\n            group.removeView(group.findViewById(obst.getId()));\r\n        });\r\n\r\n        System.out.println(\"removed\");\r\n    }\r\n\r\n    public int getGameSpeed() {\r\n        return gameSpeed;\r\n    }\r\n\r\n    public void setGameSpeed(int gameSpeed) {\r\n        this.gameSpeed = gameSpeed;\r\n    }\r\n\r\n    public int getPoints() {\r\n        return points;\r\n    }\r\n\r\n    public void setPoints(int points) {\r\n        this.points = points;\r\n    }\r\n\r\n    public void carCrash() {\r\n        if (collision()) {\r\n            gameIsRunning = false;\r\n            System.out.println(\" -- Crash -- \");\r\n\r\n            activity.runOnUiThread(() -> {\r\n                        Button restart = group.findViewById(R.id.button);\r\n                        restart.setText(\"Restart\");\r\n                        restart.setVisibility(View.VISIBLE);\r\n                        restart.setOnClickListener(\r\n                                v -> {\r\n                                    removeAll();\r\n                                    player.setLane(1);\r\n                                    new Game(activity);\r\n                                }\r\n                        );\r\n                    }\r\n            );\r\n        }\r\n    }\r\n\r\n    public boolean collision() {\r\n        for (Obstacle obstacle : lanes[player.getLane()]) {\r\n            if (obstacle.getPosition() >= playerView.getY()-(int)(playerView.getHeight()/2) && obstacle.getPosition() <= playerView.getY()+playerView.getHeight()) {\r\n                return true;\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n\r\n    public View findViewOfObstacle(Obstacle obst) {\r\n        return group.findViewById(obst.getId());\r\n    }\r\n\r\n    public void updateAll() {\r\n\r\n        for (int i = 0; i < lanes.length; i++) {\r\n            for (int j = 0; j < lanes[i].size(); j++) {\r\n                Obstacle o = lanes[i].get(j);\r\n                if (findViewOfObstacle(o) == null) continue;\r\n                findViewOfObstacle(o).setY(o.getPosition());\r\n                findViewOfObstacle(o).setVisibility(View.VISIBLE);\r\n            }\r\n        }\r\n\r\n        int offset = 32;\r\n        switch (player.getLane()) {\r\n            case 0:\r\n                playerView.setX(firstLane - offset);\r\n                break;\r\n            case 1:\r\n                playerView.setX(secondLane - offset);\r\n                break;\r\n            case 2:\r\n                playerView.setX(thirdLane - offset);\r\n        }\r\n\r\n\r\n    }\r\n\r\n    public void buttonChange() {\r\n        Button startGameButton = group.findViewById(R.id.button);\r\n        Button leftButton = group.findViewById(R.id.leftbutton);\r\n        Button rightButton = group.findViewById(R.id.rightbutton);\r\n        startGameButton.setVisibility(View.GONE);\r\n        leftButton.setVisibility(View.VISIBLE);\r\n        rightButton.setVisibility(View.VISIBLE);\r\n    }\r\n\r\n    public void removeAll(){\r\n        for(int i = 0; i < lanes.length; i++){\r\n            for(int j = 0; j < lanes[i].size(); j++){\r\n                removeObstacle(i,lanes[i].get(j));\r\n            }\r\n        }\r\n        updateAll();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/cargame/Game.java b/app/src/main/java/com/example/cargame/Game.java
+--- a/app/src/main/java/com/example/cargame/Game.java	(revision f4351259feb608aee751a4d2f4db4d8116ea26db)
++++ b/app/src/main/java/com/example/cargame/Game.java	(date 1679564541370)
+@@ -86,7 +86,7 @@
+         addPoint();
+         moveObstaclesDown();
+         carCrash();
+-        if (time % 70 == 0) {
++        if (time % 40 == 0) {
+             addObstacleRandom();
+         }
+ 
+@@ -96,7 +96,7 @@
+     public void moveObstaclesDown(){
+         for(int j = 0; j< 3; j++) {
+             for (int i = 0; i < lanes[j].size(); i++) {
+-                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
++                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + lanes[j].get(i).getSpeed());
+                 //Position die vorherige plus Speed setzen
+                 if (lanes[j].get(i).getPosition() >= 1800) {
+                     removeObstacle(j, lanes[j].get(i));
+Index: .idea/deploymentTargetDropDown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+new file mode 100644
+--- /dev/null	(date 1679563616605)
++++ b/.idea/deploymentTargetDropDown.xml	(date 1679563616605)
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="deploymentTargetDropDown">
++    <runningDeviceTargetSelectedWithDropDown>
++      <Target>
++        <type value="RUNNING_DEVICE_TARGET" />
++        <deviceKey>
++          <Key>
++            <type value="VIRTUAL_DEVICE_PATH" />
++            <value value="C:\Users\Huawei Matebook 16\.android\avd\Test_Phone_1.avd" />
++          </Key>
++        </deviceKey>
++      </Target>
++    </runningDeviceTargetSelectedWithDropDown>
++    <timeTargetWasSelectedWithDropDown value="2023-03-23T09:19:56.577583700Z" />
++  </component>
++</project>
+\ No newline at end of file
