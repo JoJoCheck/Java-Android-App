@@ -91,7 +91,7 @@ public class Game {
         addPoint();
         moveObstaclesDown();
         carCrash();
-        if (time % 70 == 0) {
+        if (time % 40 == 0) {
             addObstacleRandom();
         }
 
@@ -101,7 +101,7 @@ public class Game {
     public void moveObstaclesDown(){
         for(int j = 0; j< 3; j++) {
             for (int i = 0; i < lanes[j].size(); i++) {
-                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
+                lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + lanes[j].get(i).getSpeed());
                 //Position die vorherige plus Speed setzen
                 if (lanes[j].get(i).getPosition() >= 1800) {
                     removeObstacle(j, lanes[j].get(i));
