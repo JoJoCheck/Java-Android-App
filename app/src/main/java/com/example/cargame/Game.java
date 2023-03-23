@@ -17,6 +17,8 @@ import java.util.TimerTask;
 
 
 public class Game {
+
+    private int JonaCounter;
     public ArrayList<Obstacle>[] lanes = new ArrayList[3];
 
     private int gameSpeed;
@@ -36,6 +38,7 @@ public class Game {
     private Activity activity;
 
     private ImageView original;
+    private ImageView playerView;
     private ViewGroup.LayoutParams layout;
 
     private int firstLane = 180;
@@ -48,14 +51,15 @@ public class Game {
         lanes[0] = new ArrayList<>();
         lanes[1] = new ArrayList<>();
         lanes[2] = new ArrayList<>();
-        this.group = activity.findViewById(R.id.cl);
         this.activity = activity;
+        this.group = this.activity.findViewById(R.id.cl);
         time = 0;
-        gameSpeed = 10;
+        gameSpeed = 20;
         points = 0;
         gameIsRunning = true;
         //   group.removeView(group.findViewById(R.id.button));
         buttonChange();
+        playerView = group.findViewById(R.id.player);
         player = new Player();
         original = group.findViewById(R.id.original_car);
         layout = original.getLayoutParams();
@@ -83,9 +87,8 @@ public class Game {
         updateAll();
 
     }
-
-    public void moveObstaclesDown() {
-        for (int j = 0; j < 3; j++) {
+    public void moveObstaclesDown(){
+        for(int j = 0; j< 3; j++) {
             for (int i = 0; i < lanes[j].size(); i++) {
                 lanes[j].get(i).setPosition(lanes[j].get(i).getPosition() + gameSpeed);
                 //Position die vorherige plus Speed setzen
@@ -96,18 +99,20 @@ public class Game {
             }
         }
     }
-
-    public void movePlayerRight() {
+    public void movePlayerRight(){
         Button moveRightButton = group.findViewById(R.id.rightbutton);
         moveRightButton.setOnClickListener(v -> {
             player.moveRight();
+            System.out.println(playerView.getHeight());
+            System.out.println(playerView.getY());
         });
     }
-
-    public void movePlayerLeft() {
+    public void movePlayerLeft(){
         Button moveLeftButton = group.findViewById(R.id.leftbutton);
         moveLeftButton.setOnClickListener(v -> {
             player.moveLeft();
+            System.out.println(playerView.getHeight());
+            System.out.println(playerView.getY());
         });
     }
 
@@ -122,6 +127,8 @@ public class Game {
     public void addObstacleRandom() {
         addObstacle(random.nextInt(3));
         System.out.println("new");
+        JonaCounter++;
+        System.out.println(JonaCounter);
     }
 
     public void addObstacle(int lane) {
@@ -212,7 +219,7 @@ public class Game {
 
     public boolean collision() {
         for (Obstacle obstacle : lanes[player.getLane()]) {
-            if (obstacle.getPosition() >= 1100 && obstacle.getPosition() <= 1500) {
+            if (obstacle.getPosition() >= playerView.getY()-(int)(playerView.getHeight()/2) && obstacle.getPosition() <= playerView.getY()+playerView.getHeight()) {
                 return true;
             }
         }
@@ -230,11 +237,9 @@ public class Game {
                 Obstacle o = lanes[i].get(j);
                 if (findViewOfObstacle(o) == null) continue;
                 findViewOfObstacle(o).setY(o.getPosition());
-
             }
         }
 
-        ImageView playerView = group.findViewById(R.id.player);
         int offset = 32;
         switch (player.getLane()) {
             case 0:
