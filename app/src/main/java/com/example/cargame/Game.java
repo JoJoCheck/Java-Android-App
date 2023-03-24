@@ -342,5 +342,6 @@ public class Game {
         if (maxSpeed < 80){
             maxSpeed += 2;
         }
+        System.out.println("test");
     }
 }
