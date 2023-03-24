@@ -213,7 +213,6 @@ public class Game {
     public void carCrash() {
         if (collision()) {
             gameIsRunning = false;
-            highScore++;
             safeInt(highScore);
             activity.runOnUiThread(() -> {
                         TextView highscoreBoard = group.findViewById(R.id.highscoreBoard);
